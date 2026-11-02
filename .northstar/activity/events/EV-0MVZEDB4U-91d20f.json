@@ -1,0 +1,10 @@
+{
+  "id": "EV-0MVZEDB4U-91d20f",
+  "type": "task.created",
+  "at": "2026-11-02T15:11:54.270Z",
+  "actor": "claude-code",
+  "entityIds": [
+    "NS-008"
+  ],
+  "summary": "Task NS-008 created: Static site, llms.txt and skill file"
+}

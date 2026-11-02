@@ -1,0 +1,12 @@
+{
+  "id": "EV-0MVZEDDG4-1ef0e2",
+  "type": "task.started",
+  "at": "2026-11-02T15:11:57.268Z",
+  "actor": "claude-code",
+  "entityIds": [
+    "NS-006",
+    "MS-006"
+  ],
+  "summary": "claude-code started NS-006 provisionally (vision not yet approved): Fixtures, variants, comparison and classifier",
+  "data": {}
+}

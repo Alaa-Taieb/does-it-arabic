@@ -1,0 +1,94 @@
+{
+  "requirements": [
+    {
+      "id": "REQ-007",
+      "title": "Fixture set covering Arabic, Persian, Hebrew invoice cases",
+      "description": "8 fixtures: connected, lam-alef, harakat, mixed invoice line, digits, Persian, Hebrew, wrapping.",
+      "kind": "functional",
+      "priority": "must",
+      "status": "proposed",
+      "acceptance": [
+        "fixtures.json has 8 fixtures with text, direction and meaning",
+        "JS and Python loaders read it"
+      ],
+      "provenance": "stated",
+      "createdAt": "2026-11-02T15:11:54.270Z",
+      "updatedAt": "2026-11-02T15:11:54.270Z"
+    },
+    {
+      "id": "REQ-008",
+      "title": "Automatic judging against a Chromium reference",
+      "description": "Classify each library output as pass/partial/fail/mismatch with a diagnosis.",
+      "kind": "functional",
+      "priority": "must",
+      "status": "proposed",
+      "acceptance": [
+        "Reference and failure variants rendered by Chromium",
+        "Classifier unit tests pass",
+        "Known-good and known-bad renders are classified correctly"
+      ],
+      "provenance": "stated",
+      "createdAt": "2026-11-02T15:11:54.270Z",
+      "updatedAt": "2026-11-02T15:11:54.270Z"
+    },
+    {
+      "id": "REQ-009",
+      "title": "Matrix of real library outputs",
+      "description": "About 15 library configurations rendered and judged into matrix.json with screenshots.",
+      "kind": "functional",
+      "priority": "must",
+      "status": "proposed",
+      "acceptance": [
+        "npm run matrix produces results/matrix.json and screenshots",
+        "Errors and unsupported fixtures are recorded, not hidden"
+      ],
+      "provenance": "stated",
+      "createdAt": "2026-11-02T15:11:54.270Z",
+      "updatedAt": "2026-11-02T15:11:54.270Z"
+    },
+    {
+      "id": "REQ-010",
+      "title": "Static site and agent files",
+      "description": "Grid page, per-library pages, matrix.json, llms.txt, skill file.",
+      "kind": "functional",
+      "priority": "must",
+      "status": "proposed",
+      "acceptance": [
+        "npm start builds and serves the site",
+        "Generated files are derived only from matrix.json"
+      ],
+      "provenance": "stated",
+      "createdAt": "2026-11-02T15:11:54.270Z",
+      "updatedAt": "2026-11-02T15:11:54.270Z"
+    },
+    {
+      "id": "REQ-011",
+      "title": "Check command and GitHub Action",
+      "description": "Judge a user's own PDF/PNG for a fixture; Action wraps the command.",
+      "kind": "functional",
+      "priority": "should",
+      "status": "proposed",
+      "acceptance": [
+        "check exits non-zero on a failing render",
+        "action.yml runs the check command"
+      ],
+      "provenance": "stated",
+      "createdAt": "2026-11-02T15:11:54.270Z",
+      "updatedAt": "2026-11-02T15:11:54.270Z"
+    },
+    {
+      "id": "REQ-012",
+      "title": "Nothing fake shown as real",
+      "description": "Verdicts are machine-judged and labelled so; no invented results.",
+      "kind": "constraint",
+      "priority": "must",
+      "status": "proposed",
+      "acceptance": [
+        "Site labels verdicts as automatic until reviewed"
+      ],
+      "provenance": "stated",
+      "createdAt": "2026-11-02T15:11:54.270Z",
+      "updatedAt": "2026-11-02T15:11:54.270Z"
+    }
+  ]
+}

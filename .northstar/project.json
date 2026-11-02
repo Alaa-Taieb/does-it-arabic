@@ -1,0 +1,15 @@
+{
+  "name": "Does It Arabic?",
+  "idea": "An open, screenshot-backed test matrix of which PDF, OG-image and chart libraries render Arabic, Persian, Urdu and Hebrew correctly, shipped as a static site, a fixtures package, a CI Action and an agent skill, so both developers and coding agents stop producing broken RTL invoices.",
+  "origin": "new",
+  "idPrefix": "NS",
+  "cli": "northstar",
+  "createdAt": "2026-11-02T15:02:15.746Z",
+  "createdBy": "claude-code",
+  "vision": {
+    "status": "proposed",
+    "version": 0,
+    "history": []
+  },
+  "specification": {}
+}

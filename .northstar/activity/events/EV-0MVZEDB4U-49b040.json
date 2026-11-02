@@ -1,0 +1,10 @@
+{
+  "id": "EV-0MVZEDB4U-49b040",
+  "type": "task.created",
+  "at": "2026-11-02T15:11:54.270Z",
+  "actor": "claude-code",
+  "entityIds": [
+    "NS-006"
+  ],
+  "summary": "Task NS-006 created: Fixtures, variants, comparison and classifier"
+}

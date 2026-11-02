@@ -1,0 +1,10 @@
+{
+  "id": "EV-0MVZEDB4U-25af0a",
+  "type": "requirement.added",
+  "at": "2026-11-02T15:11:54.270Z",
+  "actor": "claude-code",
+  "entityIds": [
+    "REQ-008"
+  ],
+  "summary": "Requirement REQ-008 added: Automatic judging against a Chromium reference"
+}

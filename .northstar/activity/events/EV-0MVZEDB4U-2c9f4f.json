@@ -1,0 +1,10 @@
+{
+  "id": "EV-0MVZEDB4U-2c9f4f",
+  "type": "milestone.created",
+  "at": "2026-11-02T15:11:54.270Z",
+  "actor": "claude-code",
+  "entityIds": [
+    "MS-007"
+  ],
+  "summary": "Milestone MS-007 created: Matrix"
+}

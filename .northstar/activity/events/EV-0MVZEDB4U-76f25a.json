@@ -1,0 +1,10 @@
+{
+  "id": "EV-0MVZEDB4U-76f25a",
+  "type": "milestone.created",
+  "at": "2026-11-02T15:11:54.270Z",
+  "actor": "claude-code",
+  "entityIds": [
+    "MS-009"
+  ],
+  "summary": "Milestone MS-009 created: Check and Action"
+}

@@ -1,0 +1,9 @@
+{
+  "name": "arabic-fixtures",
+  "version": "0.1.0",
+  "description": "RTL test fixtures (Arabic, Persian, Hebrew) for PDF, OG-image and chart rendering",
+  "main": "index.js",
+  "files": ["index.js", "fixtures.json", "README.md"],
+  "license": "CC0-1.0",
+  "keywords": ["arabic", "rtl", "bidi", "persian", "hebrew", "pdf", "fixtures"]
+}

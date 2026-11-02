@@ -1,0 +1,10 @@
+{
+  "id": "EV-0MVZEDB4U-3c1c33",
+  "type": "task.created",
+  "at": "2026-11-02T15:11:54.270Z",
+  "actor": "claude-code",
+  "entityIds": [
+    "NS-007"
+  ],
+  "summary": "Task NS-007 created: Library adapters and matrix runner"
+}

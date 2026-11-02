@@ -1,0 +1,10 @@
+{
+  "id": "EV-0MVZEDB4U-71eb36",
+  "type": "feature.created",
+  "at": "2026-11-02T15:11:54.270Z",
+  "actor": "claude-code",
+  "entityIds": [
+    "F-006"
+  ],
+  "summary": "Feature F-006 created: Judging core"
+}

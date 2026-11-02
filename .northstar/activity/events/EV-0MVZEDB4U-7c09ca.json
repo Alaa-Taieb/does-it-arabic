@@ -1,0 +1,10 @@
+{
+  "id": "EV-0MVZEDB4U-7c09ca",
+  "type": "requirement.added",
+  "at": "2026-11-02T15:11:54.270Z",
+  "actor": "claude-code",
+  "entityIds": [
+    "REQ-007"
+  ],
+  "summary": "Requirement REQ-007 added: Fixture set covering Arabic, Persian, Hebrew invoice cases"
+}

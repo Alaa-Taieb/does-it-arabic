@@ -1,0 +1,10 @@
+{
+  "id": "EV-0MVZEDB4U-cf0e85",
+  "type": "task.created",
+  "at": "2026-11-02T15:11:54.270Z",
+  "actor": "claude-code",
+  "entityIds": [
+    "NS-010"
+  ],
+  "summary": "Task NS-010 created: README and DECISIONS"
+}

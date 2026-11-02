@@ -1,0 +1,10 @@
+{
+  "id": "EV-0MVZEDB4U-054479",
+  "type": "feature.created",
+  "at": "2026-11-02T15:11:54.270Z",
+  "actor": "claude-code",
+  "entityIds": [
+    "F-008"
+  ],
+  "summary": "Feature F-008 created: Site and agent files"
+}

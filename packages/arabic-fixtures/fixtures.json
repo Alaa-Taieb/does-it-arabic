@@ -1,0 +1,89 @@
+{
+  "version": "0.1.0",
+  "font": "DejaVu Sans 2.37",
+  "fontSize": 32,
+  "wrapWidth": 470,
+  "fixtures": [
+    {
+      "id": "connected",
+      "title": "Connected letterforms",
+      "script": "Arabic",
+      "lang": "ar",
+      "dir": "rtl",
+      "text": "فاتورة ضريبية للعميل",
+      "meaning": "Tax invoice for the customer",
+      "checks": "Letters must join (initial/medial/final forms), not appear as isolated letters."
+    },
+    {
+      "id": "lam-alef",
+      "title": "Lam-alef ligature",
+      "script": "Arabic",
+      "lang": "ar",
+      "dir": "rtl",
+      "text": "الإجمالي لا يشمل الضريبة",
+      "meaning": "The total does not include tax",
+      "checks": "Lam followed by alef (لا, لإ) must form the mandatory lam-alef ligature."
+    },
+    {
+      "id": "harakat",
+      "title": "Harakat (vowel marks)",
+      "script": "Arabic",
+      "lang": "ar",
+      "dir": "rtl",
+      "text": "شُكْرًا لِتَسَوُّقِكُمْ",
+      "meaning": "Thank you for shopping (fully vocalised)",
+      "checks": "Shadda, sukun, tanween and short vowels must sit on their base letters, not float or show dotted circles."
+    },
+    {
+      "id": "invoice-line",
+      "title": "Mixed bidi invoice line",
+      "script": "Arabic + Latin + digits",
+      "lang": "ar",
+      "dir": "rtl",
+      "text": "Order #1234 للعميل محمد – 250 TND",
+      "meaning": "Order #1234 for customer Mohamed – 250 TND",
+      "checks": "Unicode Bidi Algorithm with an RTL paragraph: Latin and numbers keep their left-to-right order, Arabic runs right-to-left, nothing is reversed."
+    },
+    {
+      "id": "digits",
+      "title": "Arabic-Indic and Persian digits",
+      "script": "Arabic + Persian digits",
+      "lang": "ar",
+      "dir": "rtl",
+      "text": "المجموع ١٢٣٤٫٥٠ ريال و ۶۷۸۹ تومان",
+      "meaning": "Total 1234.50 riyal and 6789 toman",
+      "checks": "Arabic-Indic (١٢٣) and Persian (۶۷۸) digits render as digits, read left-to-right inside the RTL line."
+    },
+    {
+      "id": "persian",
+      "title": "Persian letters (ی ک پ گ, ZWNJ)",
+      "script": "Persian",
+      "lang": "fa",
+      "dir": "rtl",
+      "text": "پیش‌فاکتور کالا برای مشتری گرامی",
+      "meaning": "Pro-forma invoice of goods for the dear customer",
+      "checks": "Persian yeh (ی) and keheh (ک) join correctly; the zero-width non-joiner in پیش‌فاکتور breaks the join without showing a box."
+    },
+    {
+      "id": "hebrew",
+      "title": "Hebrew with numbers",
+      "script": "Hebrew",
+      "lang": "he",
+      "dir": "rtl",
+      "text": "חשבונית מס 1234 על סך 250 ₪",
+      "meaning": "Tax invoice 1234 for the amount of 250 ₪",
+      "checks": "Hebrew runs right-to-left, the numbers stay left-to-right and in the right place."
+    },
+    {
+      "id": "wrapping",
+      "title": "Line wrapping",
+      "script": "Arabic",
+      "lang": "ar",
+      "dir": "rtl",
+      "wrap": true,
+      "text": "شكرا لتسوقكم معنا. المنتجات المستعملة لا تسترجع.",
+      "meaning": "Thank you for shopping with us. Used products cannot be returned.",
+      "checks": "Text wraps inside a box of wrapWidth units into two lines (the break point is the same even with ±15% width differences): the first four words on line one, each line right-to-left, the full stop at the left end."
+    }
+  ]
+}

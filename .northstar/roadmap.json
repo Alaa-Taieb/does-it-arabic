@@ -1,0 +1,160 @@
+{
+  "version": 1,
+  "milestones": [
+    {
+      "id": "MS-006",
+      "title": "Foundation",
+      "goal": "Fixtures, reference renderer, comparison and classifier with tests",
+      "order": 0,
+      "exitCriteria": [
+        {
+          "id": "X1",
+          "text": "pytest passes",
+          "status": "unmet"
+        }
+      ],
+      "dependsOn": [],
+      "provenance": "stated"
+    },
+    {
+      "id": "MS-007",
+      "title": "Matrix",
+      "goal": "Adapters for ~15 library configurations and the matrix runner",
+      "order": 1,
+      "exitCriteria": [
+        {
+          "id": "X1",
+          "text": "npm run matrix produces results/matrix.json",
+          "status": "unmet"
+        }
+      ],
+      "dependsOn": [
+        "MS-006"
+      ],
+      "provenance": "stated"
+    },
+    {
+      "id": "MS-008",
+      "title": "Publish",
+      "goal": "Static site, llms.txt and skill file; one-command start",
+      "order": 2,
+      "exitCriteria": [
+        {
+          "id": "X1",
+          "text": "npm start serves the grid",
+          "status": "unmet"
+        }
+      ],
+      "dependsOn": [
+        "MS-007"
+      ],
+      "provenance": "stated"
+    },
+    {
+      "id": "MS-009",
+      "title": "Check and Action",
+      "goal": "check CLI and GitHub Action",
+      "order": 3,
+      "exitCriteria": [
+        {
+          "id": "X1",
+          "text": "check CLI tested",
+          "status": "unmet"
+        }
+      ],
+      "dependsOn": [
+        "MS-008"
+      ],
+      "provenance": "stated"
+    },
+    {
+      "id": "MS-010",
+      "title": "Docs",
+      "goal": "README, DECISIONS, final verification",
+      "order": 4,
+      "exitCriteria": [
+        {
+          "id": "X1",
+          "text": "All tests pass on the final snapshot",
+          "status": "unmet"
+        }
+      ],
+      "dependsOn": [
+        "MS-009"
+      ],
+      "provenance": "stated"
+    }
+  ],
+  "features": [
+    {
+      "id": "F-006",
+      "title": "Judging core",
+      "description": "",
+      "milestoneId": "MS-006",
+      "requirementIds": [
+        "REQ-007",
+        "REQ-008"
+      ],
+      "dependsOn": [],
+      "provenance": "stated",
+      "artifacts": []
+    },
+    {
+      "id": "F-007",
+      "title": "Library matrix",
+      "description": "",
+      "milestoneId": "MS-007",
+      "requirementIds": [
+        "REQ-009"
+      ],
+      "dependsOn": [],
+      "provenance": "stated",
+      "artifacts": []
+    },
+    {
+      "id": "F-008",
+      "title": "Site and agent files",
+      "description": "",
+      "milestoneId": "MS-008",
+      "requirementIds": [
+        "REQ-010",
+        "REQ-012"
+      ],
+      "dependsOn": [],
+      "provenance": "stated",
+      "artifacts": []
+    },
+    {
+      "id": "F-009",
+      "title": "Check CLI and Action",
+      "description": "",
+      "milestoneId": "MS-009",
+      "requirementIds": [
+        "REQ-011"
+      ],
+      "dependsOn": [],
+      "provenance": "stated",
+      "artifacts": []
+    },
+    {
+      "id": "F-010",
+      "title": "Documentation",
+      "description": "",
+      "milestoneId": "MS-010",
+      "requirementIds": [
+        "REQ-012"
+      ],
+      "dependsOn": [],
+      "provenance": "stated",
+      "artifacts": []
+    }
+  ],
+  "history": [
+    {
+      "version": 1,
+      "at": "2026-11-02T15:02:15.746Z",
+      "actor": "claude-code",
+      "reason": "Project initialized"
+    }
+  ]
+}

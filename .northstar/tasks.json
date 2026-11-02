@@ -1,0 +1,193 @@
+{
+  "tasks": [
+    {
+      "id": "NS-006",
+      "title": "Fixtures, variants, comparison and classifier",
+      "description": "",
+      "featureId": "F-006",
+      "milestoneId": "MS-006",
+      "requirementIds": [
+        "REQ-007",
+        "REQ-008"
+      ],
+      "dependsOn": [],
+      "priority": "high",
+      "status": "in_progress",
+      "blockers": [],
+      "planned": true,
+      "acceptance": [
+        {
+          "id": "AC1",
+          "text": "pytest passes"
+        },
+        {
+          "id": "AC2",
+          "text": "Classifier separates correct and broken renders"
+        }
+      ],
+      "requiresHumanApproval": false,
+      "commits": [],
+      "files": [],
+      "evidence": [],
+      "decisionIds": [],
+      "provenance": "stated",
+      "createdAt": "2026-11-02T15:11:54.270Z",
+      "createdBy": "claude-code",
+      "updatedAt": "2026-11-02T15:11:57.268Z",
+      "provisional": {
+        "startedAt": "2026-11-02T15:11:57.268Z",
+        "by": "claude-code",
+        "visionSha": "49a44a16ebc223fc34dacb12b6c4be09c11962787be46e81d86c9cc04dd05a10",
+        "requirementsSha": "4e42aada3521079b6a3b4e0ffdf095a7ed44841629a9146016b0d43ee245746e"
+      },
+      "activeHarness": "claude-code",
+      "workspace": "does-it-arabic-rtl-test-matrix-for-code-and-codi",
+      "startedAt": "2026-11-02T15:11:57.268Z"
+    },
+    {
+      "id": "NS-007",
+      "title": "Library adapters and matrix runner",
+      "description": "",
+      "featureId": "F-007",
+      "milestoneId": "MS-007",
+      "requirementIds": [
+        "REQ-009"
+      ],
+      "dependsOn": [
+        "NS-006"
+      ],
+      "priority": "high",
+      "status": "planned",
+      "blockers": [],
+      "planned": true,
+      "acceptance": [
+        {
+          "id": "AC1",
+          "text": "npm run matrix produces results/matrix.json with screenshots"
+        },
+        {
+          "id": "AC2",
+          "text": "pytest passes"
+        }
+      ],
+      "requiresHumanApproval": false,
+      "commits": [],
+      "files": [],
+      "evidence": [],
+      "decisionIds": [],
+      "provenance": "stated",
+      "createdAt": "2026-11-02T15:11:54.270Z",
+      "createdBy": "claude-code",
+      "updatedAt": "2026-11-02T15:11:54.270Z"
+    },
+    {
+      "id": "NS-008",
+      "title": "Static site, llms.txt and skill file",
+      "description": "",
+      "featureId": "F-008",
+      "milestoneId": "MS-008",
+      "requirementIds": [
+        "REQ-010",
+        "REQ-012"
+      ],
+      "dependsOn": [
+        "NS-007"
+      ],
+      "priority": "high",
+      "status": "planned",
+      "blockers": [],
+      "planned": true,
+      "acceptance": [
+        {
+          "id": "AC1",
+          "text": "npm start builds and serves the site"
+        },
+        {
+          "id": "AC2",
+          "text": "pytest passes"
+        }
+      ],
+      "requiresHumanApproval": false,
+      "commits": [],
+      "files": [],
+      "evidence": [],
+      "decisionIds": [],
+      "provenance": "stated",
+      "createdAt": "2026-11-02T15:11:54.270Z",
+      "createdBy": "claude-code",
+      "updatedAt": "2026-11-02T15:11:54.270Z"
+    },
+    {
+      "id": "NS-009",
+      "title": "check CLI and GitHub Action",
+      "description": "",
+      "featureId": "F-009",
+      "milestoneId": "MS-009",
+      "requirementIds": [
+        "REQ-011"
+      ],
+      "dependsOn": [
+        "NS-008"
+      ],
+      "priority": "medium",
+      "status": "planned",
+      "blockers": [],
+      "planned": true,
+      "acceptance": [
+        {
+          "id": "AC1",
+          "text": "check exits non-zero on a broken render"
+        },
+        {
+          "id": "AC2",
+          "text": "pytest passes"
+        }
+      ],
+      "requiresHumanApproval": false,
+      "commits": [],
+      "files": [],
+      "evidence": [],
+      "decisionIds": [],
+      "provenance": "stated",
+      "createdAt": "2026-11-02T15:11:54.270Z",
+      "createdBy": "claude-code",
+      "updatedAt": "2026-11-02T15:11:54.270Z"
+    },
+    {
+      "id": "NS-010",
+      "title": "README and DECISIONS",
+      "description": "",
+      "featureId": "F-010",
+      "milestoneId": "MS-010",
+      "requirementIds": [
+        "REQ-012"
+      ],
+      "dependsOn": [
+        "NS-009"
+      ],
+      "priority": "medium",
+      "status": "planned",
+      "blockers": [],
+      "planned": true,
+      "acceptance": [
+        {
+          "id": "AC1",
+          "text": "README covers setup, usage and what is not built"
+        },
+        {
+          "id": "AC2",
+          "text": "DECISIONS records assumptions"
+        }
+      ],
+      "requiresHumanApproval": false,
+      "commits": [],
+      "files": [],
+      "evidence": [],
+      "decisionIds": [],
+      "provenance": "stated",
+      "createdAt": "2026-11-02T15:11:54.270Z",
+      "createdBy": "claude-code",
+      "updatedAt": "2026-11-02T15:11:54.270Z"
+    }
+  ]
+}
