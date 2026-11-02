@@ -1,0 +1,14 @@
+{
+  "id": "EV-0MVZF4ZGR-4628dc",
+  "type": "task.implemented",
+  "at": "2026-11-02T15:33:25.515Z",
+  "actor": "claude-code",
+  "entityIds": [
+    "NS-010",
+    "MS-010"
+  ],
+  "summary": "claude-code reported NS-010 implemented (NOT verified): README (setup, usage, results, what is not built), DECISIONS (choices, thresholds, brief claims checked), MIT licence; fresh clone passes 79 tests and npm start serves the site",
+  "data": {
+    "revision": "665c99cc0639785669a5eb2e474a6187f260726b"
+  }
+}

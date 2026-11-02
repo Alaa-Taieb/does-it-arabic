@@ -284,7 +284,7 @@
         "NS-009"
       ],
       "priority": "medium",
-      "status": "in_progress",
+      "status": "verification_pending",
       "blockers": [],
       "planned": true,
       "acceptance": [
@@ -308,14 +308,39 @@
         "visionSha": "49a44a16ebc223fc34dacb12b6c4be09c11962787be46e81d86c9cc04dd05a10",
         "requirementsSha": "f750d0f2f7772e9712272e53385d019a5684e4067bf8acb62fd8e8b3d79317fb"
       },
-      "commits": [],
-      "files": [],
-      "evidence": [],
+      "commits": [
+        "0b669de"
+      ],
+      "files": [
+        "README.md",
+        "DECISIONS.md"
+      ],
+      "implementation": {
+        "reportedAt": "2026-11-02T15:33:25.515Z",
+        "by": "claude-code",
+        "summary": "README (setup, usage, results, what is not built), DECISIONS (choices, thresholds, brief claims checked), MIT licence; fresh clone passes 79 tests and npm start serves the site",
+        "revision": "665c99cc0639785669a5eb2e474a6187f260726b",
+        "tree": "558f1b519f27e823bdb4919cb862c90243220a0b"
+      },
+      "evidence": [
+        {
+          "id": "E1",
+          "kind": "automated",
+          "method": "unit-tests",
+          "result": "pass",
+          "revision": "665c99cc0639785669a5eb2e474a6187f260726b",
+          "tree": "558f1b519f27e823bdb4919cb862c90243220a0b",
+          "at": "2026-11-02T15:33:56.177Z",
+          "by": "claude-code",
+          "detail": "$ python -m pytest -q\nshell: bash\nexit 0\n........................................................................ [ 91%]\r\n.......                                                                  [100%]\r\n79 passed in 29.15s",
+          "criteria": []
+        }
+      ],
       "decisionIds": [],
       "provenance": "stated",
       "createdAt": "2026-11-02T15:11:54.270Z",
       "createdBy": "claude-code",
-      "updatedAt": "2026-11-02T15:30:00.189Z"
+      "updatedAt": "2026-11-02T15:33:56.177Z"
     }
   ]
 }
