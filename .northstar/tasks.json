@@ -341,6 +341,29 @@
       "createdAt": "2026-11-02T15:11:54.270Z",
       "createdBy": "claude-code",
       "updatedAt": "2026-11-02T15:33:56.177Z"
+    },
+    {
+      "id": "NS-011",
+      "title": "Publish: public GitHub repo, arabic-fixtures 0.1.0 on npm and PyPI",
+      "description": "",
+      "milestoneId": "MS-010",
+      "requirementIds": [],
+      "dependsOn": [],
+      "priority": "medium",
+      "status": "planned",
+      "blockers": [],
+      "planned": false,
+      "classification": "minor",
+      "acceptance": [],
+      "requiresHumanApproval": false,
+      "commits": [],
+      "files": [],
+      "evidence": [],
+      "decisionIds": [],
+      "provenance": "stated",
+      "createdAt": "2026-11-02T15:48:24.762Z",
+      "createdBy": "claude-code",
+      "updatedAt": "2026-11-02T15:48:24.762Z"
     }
   ]
 }

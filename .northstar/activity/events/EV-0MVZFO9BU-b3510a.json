@@ -1,0 +1,10 @@
+{
+  "id": "EV-0MVZFO9BU-b3510a",
+  "type": "task.created_unplanned",
+  "at": "2026-11-02T15:48:24.762Z",
+  "actor": "claude-code",
+  "entityIds": [
+    "NS-011"
+  ],
+  "summary": "Task NS-011 created (unplanned, minor): Publish: public GitHub repo, arabic-fixtures 0.1.0 on npm and PyPI"
+}
