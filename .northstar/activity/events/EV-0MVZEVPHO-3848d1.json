@@ -1,0 +1,14 @@
+{
+  "id": "EV-0MVZEVPHO-3848d1",
+  "type": "task.implemented",
+  "at": "2026-11-02T15:26:12.684Z",
+  "actor": "claude-code",
+  "entityIds": [
+    "NS-008",
+    "MS-008"
+  ],
+  "summary": "claude-code reported NS-008 implemented (NOT verified): Static site (grid, invoice strip, per-library pages with adapter source, fixtures, method), matrix.json, llms.txt, SKILL.md; npm start builds and serves on :8000; 64 tests",
+  "data": {
+    "revision": "db87d502b86eb688ffcb609790d474772e23a697"
+  }
+}

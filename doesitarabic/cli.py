@@ -66,6 +66,45 @@ def cmd_serve(args) -> int:
     return 0
 
 
+def cmd_check(args) -> int:
+    import json
+    from pathlib import Path
+
+    from .check import check_endpoint, judge_file, markdown_report, parse_spec, reference_dir_for
+
+    try:
+        ref_dir = reference_dir_for(Path(args.font) if args.font else None)
+        if args.endpoint:
+            ids = args.fixture or [f["id"] for f in load_fixtures()["fixtures"]]
+            results = check_endpoint(args.endpoint, ids, ref_dir, args.method)
+        else:
+            if args.spec or args.spec_file:
+                spec = args.spec if args.spec else Path(args.spec_file).read_text(encoding="utf-8")
+                pairs = parse_spec(spec)
+            elif args.file and args.fixture and len(args.fixture) == 1:
+                pairs = [(args.fixture[0], args.file)]
+            else:
+                print("give FILE --fixture ID, --spec, --spec-file or --endpoint", file=sys.stderr)
+                return 2
+            results = [judge_file(path, fid, ref_dir) for fid, path in pairs]
+    except (ValueError, KeyError, FileNotFoundError) as exc:
+        print(f"error: {exc}", file=sys.stderr)
+        return 2
+
+    if args.json:
+        print(json.dumps([r.to_dict() for r in results], ensure_ascii=False, indent=2))
+    else:
+        for r in results:
+            mark = "PASS" if r.verdict == "pass" else r.verdict.upper()
+            print(f"{mark:8s} {r.fixture:13s} {r.label}")
+            if r.verdict != "pass" and r.advice:
+                print(f"         fix: {r.advice}")
+    if args.summary:
+        with open(args.summary, "a", encoding="utf-8") as fh:
+            fh.write(markdown_report(results, args.allow_partial))
+    return 0 if all(r.ok(args.allow_partial) for r in results) else 1
+
+
 def build_parser() -> argparse.ArgumentParser:
     p = argparse.ArgumentParser(prog="doesitarabic", description="Does It Arabic? RTL test matrix")
     sub = p.add_subparsers(dest="command", required=True)
@@ -85,6 +124,19 @@ def build_parser() -> argparse.ArgumentParser:
     sv.add_argument("--host", default="127.0.0.1")
     sv.add_argument("--no-build", action="store_true")
     sv.set_defaults(func=cmd_serve)
+
+    c = sub.add_parser("check", help="judge your own PDF/PNG output (or an endpoint) against the fixtures")
+    c.add_argument("file", nargs="?", help="PDF, PNG, JPEG or WebP containing only the fixture text")
+    c.add_argument("--fixture", action="append", help="fixture id (repeat for several with --endpoint)")
+    c.add_argument("--spec", help="lines of '<fixture-id> <path>'")
+    c.add_argument("--spec-file", help="file with lines of '<fixture-id> <path>'")
+    c.add_argument("--endpoint", help="URL that renders a fixture: POST JSON {id,text,dir,lang}, or GET with {text}")
+    c.add_argument("--method", default="POST", choices=["POST", "GET"])
+    c.add_argument("--font", help="the TTF/OTF your output uses (references are rendered with it)")
+    c.add_argument("--allow-partial", action="store_true", help="treat 'partial' (LTR base direction) as passing")
+    c.add_argument("--json", action="store_true")
+    c.add_argument("--summary", help="append a Markdown report to this file (e.g. $GITHUB_STEP_SUMMARY)")
+    c.set_defaults(func=cmd_check)
     return p
 
 

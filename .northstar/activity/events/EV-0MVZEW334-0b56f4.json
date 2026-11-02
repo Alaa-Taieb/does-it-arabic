@@ -1,0 +1,14 @@
+{
+  "id": "EV-0MVZEW334-0b56f4",
+  "type": "task.started",
+  "at": "2026-11-02T15:26:30.304Z",
+  "actor": "claude-code",
+  "entityIds": [
+    "NS-009",
+    "MS-009"
+  ],
+  "summary": "claude-code started NS-009 provisionally (vision not yet approved): check CLI and GitHub Action",
+  "data": {
+    "branch": "master"
+  }
+}

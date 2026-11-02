@@ -1,0 +1,48 @@
+name: Does It Arabic? RTL check
+description: Fail the build when your PDFs or images render Arabic, Persian or Hebrew text incorrectly.
+branding:
+  icon: check-circle
+  color: green
+inputs:
+  checks:
+    description: >
+      Lines of "<fixture-id> <path>": files your build rendered from the fixture text
+      (see packages/arabic-fixtures/fixtures.json), each containing only that text.
+    required: false
+  endpoint:
+    description: URL of your renderer. It receives POST JSON {id, text, dir, lang} and must return a PDF or PNG.
+    required: false
+  fixtures:
+    description: Space-separated fixture ids to send to the endpoint (default all).
+    required: false
+  font:
+    description: Path to the TTF/OTF your output uses, so references are rendered in the same font.
+    required: false
+  allow-partial:
+    description: Treat "partial" (correct shaping, LTR base direction) as passing.
+    required: false
+    default: "false"
+runs:
+  using: composite
+  steps:
+    - uses: actions/setup-python@v5
+      with:
+        python-version: "3.12"
+    - uses: actions/setup-node@v4
+      with:
+        node-version: "20"
+    - name: Install Does It Arabic?
+      shell: bash
+      run: |
+        python -m pip install --quiet -r "$GITHUB_ACTION_PATH/requirements.txt"
+        npm ci --prefix "$GITHUB_ACTION_PATH" --no-audit --no-fund --silent
+    - name: Check RTL rendering
+      shell: bash
+      env:
+        PYTHONPATH: ${{ github.action_path }}
+        INPUT_CHECKS: ${{ inputs.checks }}
+        INPUT_ENDPOINT: ${{ inputs.endpoint }}
+        INPUT_FIXTURES: ${{ inputs.fixtures }}
+        INPUT_FONT: ${{ inputs.font }}
+        INPUT_ALLOW_PARTIAL: ${{ inputs.allow-partial }}
+      run: python "$GITHUB_ACTION_PATH/action/run.py"
