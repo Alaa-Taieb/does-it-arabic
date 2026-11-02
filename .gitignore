@@ -5,3 +5,5 @@ __pycache__/
 .pytest_cache/
 dist/
 results/.cache/
+BRIEF.md
+packages/arabic-fixtures/dist/

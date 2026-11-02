@@ -34,6 +34,7 @@ matrix or to check output in a custom font. Viewing the site works without it. S
 not in a standard location. No browser is downloaded.
 
 ```bash
+git clone https://github.com/Alaa-Taieb/does-it-arabic.git && cd does-it-arabic
 npm install
 pip install -r requirements.txt               # core: numpy, Pillow, pypdfium2, pytest, PyYAML
 pip install -r requirements-adapters.txt      # only to re-run the Python library adapters
@@ -67,7 +68,7 @@ Exit codes: 0 means every check passed, 1 means at least one failed, 2 means a u
 `action.yml` is a composite action that wraps `check` and writes a Markdown table to the job summary:
 
 ```yaml
-- uses: <owner>/does-it-arabic@<ref>   # not published: copy this repo or use a local path
+- uses: Alaa-Taieb/does-it-arabic@v0.1.0
   with:
     checks: |
       invoice-line build/fixtures/invoice-line.pdf
@@ -86,8 +87,15 @@ Or use `endpoint: http://localhost:3000/render` to have the action call your ren
 
 ### Fixtures package
 
-`packages/arabic-fixtures` holds the eight fixtures (`fixtures.json`, CC0) with a JS loader (`index.js`) and a
-Python loader (`arabic_fixtures.py`). The fixtures are connected letterforms, lam-alef, harakat, the mixed
+The eight fixtures are published as `arabic-fixtures` on npm and PyPI (CC0). The source is in
+`packages/arabic-fixtures`.
+
+```bash
+npm install arabic-fixtures     # require('arabic-fixtures').get('invoice-line').text
+pip install arabic-fixtures     # import arabic_fixtures; arabic_fixtures.get("invoice-line")["text"]
+```
+
+The fixtures are connected letterforms, lam-alef, harakat, the mixed
 invoice line, Arabic-Indic and Persian digits, Persian letters with ZWNJ, Hebrew with numbers, and line wrapping.
 
 ## How it works
@@ -119,15 +127,19 @@ The site's *How it is judged* page explains the method and its limits.
   glyphs" bugs are out of scope.
 - **Region selection in `check`.** Your file has to contain only the fixture text. You can't point it at one
   line of a full invoice yet.
-- **Publishing.** Nothing is deployed or published: the site, npm/PyPI packages, the Action on the Marketplace,
-  and the issues for library maintainers. The Python fixtures loader has no packaging metadata yet.
+- **Hosting the site.** The site is not deployed anywhere yet; run it locally with `npm start`. The Action is
+  not listed on the Marketplace, and no issues have been filed with library maintainers.
 - **Only tested on Windows 11.** Linux runners should work (`find-chrome.mjs` knows the usual paths) but have not
   been tried, and the Action has never run on GitHub.
-- Paid audits, sponsorship and a hosted service are not built.
 
 ## Accounts, payments, API keys
 
 None are used. No mocks were needed. The endpoint tests start a real renderer on `127.0.0.1` inside the tests.
+
+## Author
+
+Made by [Alaa Taieb](https://github.com/Alaa-Taieb). Corrections from native speakers of Arabic, Persian, Urdu and
+Hebrew are welcome in the [issues](https://github.com/Alaa-Taieb/does-it-arabic/issues).
 
 ## Licences
 

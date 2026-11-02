@@ -80,8 +80,10 @@ were treated as leads to check. What this build did and did not check is listed 
   and the dated record is part of the repository. Raw PDFs are not kept because each embeds the full font.
 - **Northstar tracks the project.** Tasks were started provisionally because the vision has not been approved
   yet. The approval is yours to give.
-- **The fixtures package is not published**, and the Python loader has no `pyproject.toml`. I removed an
-  untested packaging file rather than ship one I had not verified.
+- **The fixtures package ships to npm and PyPI from one `fixtures.json`.** The Python wheel copies the file in
+  with hatchling's force-include, so the two packages cannot drift apart. Both packages were installed into
+  clean environments before publishing.
+- **The idea brief is kept out of the public repository** (owner's decision). It stays on disk, git-ignored.
 
 ## Brief claims: what this run checked
 
@@ -94,5 +96,5 @@ were treated as leads to check. What this build did and did not check is listed 
   deleted (`delete_harakat: True` is arabic_reshaper's default), and wrapped lines come out in the wrong order.
   In JS, adding a reshaper and bidi-js to jsPDF 4.2.1 made every fixture fail, because jsPDF already shapes
   Arabic itself.
-- *jsPDF issue #3467 "closed as stale", agents "default to jsPDF or satori", ZATCA/ETA market size, revenue
-  figures:* **not checked.** No web research was done in this build.
+- *jsPDF issue #3467 "closed as stale", agents "default to jsPDF or satori", and the market claims:*
+  **not checked.** No web research was done in this build.

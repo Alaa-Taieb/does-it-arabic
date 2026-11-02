@@ -3,7 +3,11 @@
 import json
 from pathlib import Path
 
-_DATA = json.loads((Path(__file__).with_name("fixtures.json")).read_text(encoding="utf-8"))
+# Installed wheels carry fixtures.json inside the module; in the repository it sits one level up,
+# shared with the npm package.
+_HERE = Path(__file__).resolve().parent
+_PATH = next(p for p in (_HERE / "fixtures.json", _HERE.parent / "fixtures.json") if p.exists())
+_DATA = json.loads(_PATH.read_text(encoding="utf-8"))
 
 fixtures = _DATA["fixtures"]
 font_size = _DATA["fontSize"]

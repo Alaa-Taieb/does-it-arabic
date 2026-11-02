@@ -1,9 +1,37 @@
 {
   "name": "arabic-fixtures",
   "version": "0.1.0",
-  "description": "RTL test fixtures (Arabic, Persian, Hebrew) for PDF, OG-image and chart rendering",
+  "description": "RTL test fixtures (Arabic, Persian, Hebrew) for checking PDF, OG-image and chart rendering",
   "main": "index.js",
-  "files": ["index.js", "fixtures.json", "README.md"],
+  "files": [
+    "index.js",
+    "index.d.ts",
+    "fixtures.json",
+    "README.md",
+    "LICENSE"
+  ],
   "license": "CC0-1.0",
-  "keywords": ["arabic", "rtl", "bidi", "persian", "hebrew", "pdf", "fixtures"]
+  "keywords": [
+    "arabic",
+    "rtl",
+    "bidi",
+    "persian",
+    "farsi",
+    "hebrew",
+    "pdf",
+    "fixtures",
+    "i18n",
+    "testing"
+  ],
+  "types": "index.d.ts",
+  "author": "Alaa Taieb (https://github.com/Alaa-Taieb)",
+  "homepage": "https://github.com/Alaa-Taieb/does-it-arabic/tree/main/packages/arabic-fixtures#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Alaa-Taieb/does-it-arabic.git",
+    "directory": "packages/arabic-fixtures"
+  },
+  "bugs": {
+    "url": "https://github.com/Alaa-Taieb/does-it-arabic/issues"
+  }
 }
