@@ -52,5 +52,5 @@ def load_references(fixture: dict, ref_dir: Path = REFERENCE_DIR) -> dict[str, I
         p = reference_path(fixture["id"], job["variant"], ref_dir)
         if not p.exists():
             raise FileNotFoundError(f"missing reference {p}; run `python -m doesitarabic references` first")
-        refs[job["variant"]] = load_ink(p)
+        refs[job["variant"]] = load_ink(p, multiline=bool(fixture.get("wrap")))
     return refs

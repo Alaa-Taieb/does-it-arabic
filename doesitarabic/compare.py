@@ -67,9 +67,57 @@ def crop_ink(ink: np.ndarray, threshold: float = INK_THRESHOLD) -> Ink | None:
     return Ink(ink[rows[0] : rows[-1] + 1, cols[0] : cols[-1] + 1].astype(np.float32))
 
 
-def load_ink(path: str | Path) -> Ink | None:
+LINE_MERGE_GAP = 0.35  # gaps smaller than this x line height are dots/harakat, not a line break
+LINE_GAP = 0.25  # normalised gap between re-stacked lines, x median line height
+
+
+def text_lines(ink: Ink, threshold: float = INK_THRESHOLD) -> list[tuple[int, int]]:
+    """Row ranges [start, end) of the text lines in a cropped ink map."""
+    rows = (ink.data > threshold).any(axis=1)
+    runs: list[list[int]] = []
+    start = None
+    for i, on in enumerate(rows):
+        if on and start is None:
+            start = i
+        elif not on and start is not None:
+            runs.append([start, i])
+            start = None
+    if start is not None:
+        runs.append([start, len(rows)])
+    if not runs:
+        return []
+    tallest = max(e - s for s, e in runs)
+    merged = [runs[0]]
+    for s, e in runs[1:]:
+        if s - merged[-1][1] < LINE_MERGE_GAP * tallest:
+            merged[-1][1] = e
+        else:
+            merged.append([s, e])
+    return [(s, e) for s, e in merged]
+
+
+def restack_lines(ink: Ink) -> Ink:
+    """Re-stack the lines of a paragraph with a fixed gap, so line spacing (leading) does not count.
+
+    Each line keeps its horizontal position, so alignment and line order still matter.
+    """
+    lines = text_lines(ink)
+    if len(lines) < 2:
+        return ink
+    heights = sorted(e - s for s, e in lines)
+    gap = max(1, int(round(LINE_GAP * heights[len(heights) // 2])))
+    parts = []
+    for i, (s, e) in enumerate(lines):
+        if i:
+            parts.append(np.zeros((gap, ink.width), dtype=np.float32))
+        parts.append(ink.data[s:e])
+    return Ink(np.vstack(parts))
+
+
+def load_ink(path: str | Path, multiline: bool = False) -> Ink | None:
     with Image.open(path) as img:
-        return crop_ink(ink_from_image(img))
+        ink = crop_ink(ink_from_image(img))
+    return restack_lines(ink) if multiline and ink is not None else ink
 
 
 def _resample(ink: Ink, width: int, height: int) -> np.ndarray:

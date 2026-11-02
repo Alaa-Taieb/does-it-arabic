@@ -1,0 +1,14 @@
+{
+  "id": "EV-0MVZEGOCD-d7625f",
+  "type": "task.implemented",
+  "at": "2026-11-02T15:14:31.357Z",
+  "actor": "claude-code",
+  "entityIds": [
+    "NS-006",
+    "MS-006"
+  ],
+  "summary": "claude-code reported NS-006 implemented (NOT verified): Fixtures package (JSON + JS/Python loaders), Chromium reference and failure-variant renderer, renderer-independent comparison and classifier with 37 pytest tests using real library outputs",
+  "data": {
+    "revision": "4f3736bb983e9da2fe26247476800d82307ca820+dirty"
+  }
+}

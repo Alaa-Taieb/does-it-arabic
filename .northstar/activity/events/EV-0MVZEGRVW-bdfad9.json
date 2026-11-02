@@ -1,0 +1,14 @@
+{
+  "id": "EV-0MVZEGRVW-bdfad9",
+  "type": "task.started",
+  "at": "2026-11-02T15:14:35.948Z",
+  "actor": "claude-code",
+  "entityIds": [
+    "NS-007",
+    "MS-007"
+  ],
+  "summary": "claude-code started NS-007 provisionally (vision not yet approved): Library adapters and matrix runner",
+  "data": {
+    "branch": "master"
+  }
+}

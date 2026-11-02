@@ -1,0 +1,2636 @@
+{
+  "schema": 1,
+  "generatedAt": "2026-11-02T15:21:58+00:00",
+  "reference": {
+    "renderer": "chromium",
+    "version": "156.0.8078.74"
+  },
+  "font": "DejaVu Sans 2.37",
+  "judging": {
+    "matchThreshold": 0.08,
+    "sameThreshold": 0.03,
+    "method": "automatic"
+  },
+  "fixtures": [
+    {
+      "id": "connected",
+      "title": "Connected letterforms",
+      "script": "Arabic",
+      "lang": "ar",
+      "dir": "rtl",
+      "text": "فاتورة ضريبية للعميل",
+      "meaning": "Tax invoice for the customer",
+      "checks": "Letters must join (initial/medial/final forms), not appear as isolated letters."
+    },
+    {
+      "id": "lam-alef",
+      "title": "Lam-alef ligature",
+      "script": "Arabic",
+      "lang": "ar",
+      "dir": "rtl",
+      "text": "الإجمالي لا يشمل الضريبة",
+      "meaning": "The total does not include tax",
+      "checks": "Lam followed by alef (لا, لإ) must form the mandatory lam-alef ligature."
+    },
+    {
+      "id": "harakat",
+      "title": "Harakat (vowel marks)",
+      "script": "Arabic",
+      "lang": "ar",
+      "dir": "rtl",
+      "text": "شُكْرًا لِتَسَوُّقِكُمْ",
+      "meaning": "Thank you for shopping (fully vocalised)",
+      "checks": "Shadda, sukun, tanween and short vowels must sit on their base letters, not float or show dotted circles."
+    },
+    {
+      "id": "invoice-line",
+      "title": "Mixed bidi invoice line",
+      "script": "Arabic + Latin + digits",
+      "lang": "ar",
+      "dir": "rtl",
+      "text": "Order #1234 للعميل محمد – 250 TND",
+      "meaning": "Order #1234 for customer Mohamed – 250 TND",
+      "checks": "Unicode Bidi Algorithm with an RTL paragraph: Latin and numbers keep their left-to-right order, Arabic runs right-to-left, nothing is reversed."
+    },
+    {
+      "id": "digits",
+      "title": "Arabic-Indic and Persian digits",
+      "script": "Arabic + Persian digits",
+      "lang": "ar",
+      "dir": "rtl",
+      "text": "المجموع ١٢٣٤٫٥٠ ريال و ۶۷۸۹ تومان",
+      "meaning": "Total 1234.50 riyal and 6789 toman",
+      "checks": "Arabic-Indic (١٢٣) and Persian (۶۷۸) digits render as digits, read left-to-right inside the RTL line."
+    },
+    {
+      "id": "persian",
+      "title": "Persian letters (ی ک پ گ, ZWNJ)",
+      "script": "Persian",
+      "lang": "fa",
+      "dir": "rtl",
+      "text": "پیش‌فاکتور کالا برای مشتری گرامی",
+      "meaning": "Pro-forma invoice of goods for the dear customer",
+      "checks": "Persian yeh (ی) and keheh (ک) join correctly; the zero-width non-joiner in پیش‌فاکتور breaks the join without showing a box."
+    },
+    {
+      "id": "hebrew",
+      "title": "Hebrew with numbers",
+      "script": "Hebrew",
+      "lang": "he",
+      "dir": "rtl",
+      "text": "חשבונית מס 1234 על סך 250 ₪",
+      "meaning": "Tax invoice 1234 for the amount of 250 ₪",
+      "checks": "Hebrew runs right-to-left, the numbers stay left-to-right and in the right place."
+    },
+    {
+      "id": "wrapping",
+      "title": "Line wrapping",
+      "script": "Arabic",
+      "lang": "ar",
+      "dir": "rtl",
+      "wrap": true,
+      "text": "شكرا لتسوقكم معنا. المنتجات المستعملة لا تسترجع.",
+      "meaning": "Thank you for shopping with us. Used products cannot be returned.",
+      "checks": "Text wraps inside a box of wrapWidth units into two lines (the break point is the same even with ±15% width differences): the first four words on line one, each line right-to-left, the full stop at the left end."
+    }
+  ],
+  "variants": {
+    "ok": {
+      "verdict": "pass",
+      "label": "Correct: shaped and in Unicode Bidi order",
+      "advice": ""
+    },
+    "ltr-base": {
+      "verdict": "partial",
+      "label": "Shaped and bidi-ordered, but with a left-to-right base direction",
+      "advice": "Set the paragraph/base direction to RTL (or start the line with an RLM)."
+    },
+    "unshaped": {
+      "verdict": "fail",
+      "label": "Letters disconnected (no Arabic shaping), order correct",
+      "advice": "The library does not shape Arabic: use a library with HarfBuzz shaping, or pre-shape the text."
+    },
+    "no-bidi": {
+      "verdict": "fail",
+      "label": "Letters joined but drawn left-to-right in typing order (no bidi reordering)",
+      "advice": "Apply the Unicode Bidi Algorithm (e.g. bidi-js / python-bidi get_display) or set RTL direction."
+    },
+    "naive": {
+      "verdict": "fail",
+      "label": "Disconnected letters drawn left-to-right in typing order (no shaping, no bidi)",
+      "advice": "The library draws code points one by one: use a library with HarfBuzz shaping and bidi."
+    },
+    "reversed": {
+      "verdict": "fail",
+      "label": "Whole line reversed: Arabic looks right but Latin text and numbers are mirrored",
+      "advice": "Do not reverse the whole string; run a real bidi algorithm that keeps LTR runs intact."
+    },
+    "unshaped-reversed": {
+      "verdict": "fail",
+      "label": "Disconnected letters and the whole line reversed (numbers and Latin mirrored)",
+      "advice": "Shape the text and run a real bidi algorithm instead of reversing the string."
+    }
+  },
+  "modes": {
+    "default": "The library's documented basic text API, plus its own RTL/direction option when it has one.",
+    "builtin-option": "A non-default switch the library itself documents for complex scripts.",
+    "workaround": "Third-party pre-processing commonly suggested on Stack Overflow and by coding agents.",
+    "escape-hatch": "Printing HTML with headless Chrome, what many teams end up doing."
+  },
+  "rows": [
+    {
+      "id": "jspdf",
+      "library": "jsPDF",
+      "package": "jspdf",
+      "ecosystem": "npm",
+      "category": "pdf",
+      "mode": "default",
+      "adapter": "adapters/node/jspdf.mjs",
+      "version": "4.2.1",
+      "summary": "partial",
+      "passed": 4,
+      "judged": 8,
+      "cells": {
+        "connected": {
+          "verdict": "pass",
+          "variant": "ok",
+          "distance": 0.0034,
+          "label": "Correct: shaped and in Unicode Bidi order",
+          "advice": "",
+          "nearest": "ok",
+          "distances": {
+            "ok": 0.0034,
+            "unshaped": 0.7957,
+            "no-bidi": 0.631,
+            "naive": 0.8084
+          },
+          "shot": "shots/jspdf/connected.png",
+          "source": "pdf"
+        },
+        "lam-alef": {
+          "verdict": "pass",
+          "variant": "ok",
+          "distance": 0.0059,
+          "label": "Correct: shaped and in Unicode Bidi order",
+          "advice": "",
+          "nearest": "ok",
+          "distances": {
+            "ok": 0.0059,
+            "unshaped": 0.7746,
+            "no-bidi": 0.6554,
+            "naive": 0.7965
+          },
+          "shot": "shots/jspdf/lam-alef.png",
+          "source": "pdf"
+        },
+        "harakat": {
+          "verdict": "mismatch",
+          "variant": null,
+          "distance": null,
+          "label": "Differs from the correct rendering and from every known failure pattern; needs human review",
+          "advice": "",
+          "nearest": "ok",
+          "distances": {
+            "ok": 0.5012,
+            "unshaped": 0.6996,
+            "no-bidi": 0.7009,
+            "naive": 0.7616
+          },
+          "shot": "shots/jspdf/harakat.png",
+          "source": "pdf"
+        },
+        "invoice-line": {
+          "verdict": "partial",
+          "variant": "ltr-base",
+          "distance": 0.0049,
+          "label": "Shaped and bidi-ordered, but with a left-to-right base direction",
+          "advice": "Set the paragraph/base direction to RTL (or start the line with an RLM).",
+          "nearest": "ltr-base",
+          "distances": {
+            "ok": 0.6903,
+            "ltr-base": 0.0049,
+            "unshaped": 0.703,
+            "no-bidi": 0.3831,
+            "naive": 0.6424,
+            "reversed": 0.6295,
+            "unshaped-reversed": 0.6571
+          },
+          "shot": "shots/jspdf/invoice-line.png",
+          "source": "pdf"
+        },
+        "digits": {
+          "verdict": "pass",
+          "variant": "ok",
+          "distance": 0.0035,
+          "label": "Correct: shaped and in Unicode Bidi order",
+          "advice": "",
+          "nearest": "ok",
+          "distances": {
+            "ok": 0.0035,
+            "unshaped": 0.5605,
+            "no-bidi": 0.6473,
+            "naive": 0.7223,
+            "reversed": 0.2325,
+            "unshaped-reversed": 0.5941
+          },
+          "shot": "shots/jspdf/digits.png",
+          "source": "pdf"
+        },
+        "persian": {
+          "verdict": "pass",
+          "variant": "ok",
+          "distance": 0.002,
+          "label": "Correct: shaped and in Unicode Bidi order",
+          "advice": "",
+          "nearest": "ok",
+          "distances": {
+            "ok": 0.002,
+            "unshaped": 0.8147,
+            "no-bidi": 0.6643,
+            "naive": 0.8417
+          },
+          "shot": "shots/jspdf/persian.png",
+          "source": "pdf"
+        },
+        "hebrew": {
+          "verdict": "mismatch",
+          "variant": null,
+          "distance": null,
+          "label": "Differs from the correct rendering and from every known failure pattern; needs human review",
+          "advice": "",
+          "nearest": "no-bidi",
+          "distances": {
+            "ok": 0.687,
+            "ltr-base": 0.5823,
+            "no-bidi": 0.1617,
+            "reversed": 0.6816
+          },
+          "shot": "shots/jspdf/hebrew.png",
+          "source": "pdf"
+        },
+        "wrapping": {
+          "verdict": "mismatch",
+          "variant": null,
+          "distance": null,
+          "label": "Differs from the correct rendering and from every known failure pattern; needs human review",
+          "advice": "",
+          "nearest": "unshaped",
+          "distances": {
+            "ok": 1.1865,
+            "ltr-base": 1.2186,
+            "unshaped": 0.6651,
+            "no-bidi": 1.2123,
+            "naive": 0.7828
+          },
+          "shot": "shots/jspdf/wrapping.png",
+          "source": "pdf"
+        }
+      }
+    },
+    {
+      "id": "jspdf-reshaper",
+      "library": "jsPDF + reshaper + bidi-js",
+      "package": "jspdf",
+      "ecosystem": "npm",
+      "category": "pdf",
+      "mode": "workaround",
+      "adapter": "adapters/node/jspdf-reshaper.mjs",
+      "version": "4.2.1 + arabic-persian-reshaper 1.0.1 + bidi-js 1.1.0",
+      "summary": "fail",
+      "passed": 0,
+      "judged": 8,
+      "cells": {
+        "connected": {
+          "verdict": "mismatch",
+          "variant": null,
+          "distance": null,
+          "label": "Differs from the correct rendering and from every known failure pattern; needs human review",
+          "advice": "",
+          "nearest": "ok",
+          "distances": {
+            "ok": 0.6016,
+            "unshaped": 0.8657,
+            "no-bidi": 0.6883,
+            "naive": 0.839
+          },
+          "shot": "shots/jspdf-reshaper/connected.png",
+          "source": "pdf"
+        },
+        "lam-alef": {
+          "verdict": "mismatch",
+          "variant": null,
+          "distance": null,
+          "label": "Differs from the correct rendering and from every known failure pattern; needs human review",
+          "advice": "",
+          "nearest": "no-bidi",
+          "distances": {
+            "ok": 0.6616,
+            "unshaped": 0.8747,
+            "no-bidi": 0.461,
+            "naive": 0.754
+          },
+          "shot": "shots/jspdf-reshaper/lam-alef.png",
+          "source": "pdf"
+        },
+        "harakat": {
+          "verdict": "mismatch",
+          "variant": null,
+          "distance": null,
+          "label": "Differs from the correct rendering and from every known failure pattern; needs human review",
+          "advice": "",
+          "nearest": "unshaped",
+          "distances": {
+            "ok": 0.7243,
+            "unshaped": 0.6892,
+            "no-bidi": 0.7194,
+            "naive": 0.7113
+          },
+          "shot": "shots/jspdf-reshaper/harakat.png",
+          "source": "pdf"
+        },
+        "invoice-line": {
+          "verdict": "mismatch",
+          "variant": null,
+          "distance": null,
+          "label": "Differs from the correct rendering and from every known failure pattern; needs human review",
+          "advice": "",
+          "nearest": "ok",
+          "distances": {
+            "ok": 0.1424,
+            "ltr-base": 0.6669,
+            "unshaped": 0.5527,
+            "no-bidi": 0.7306,
+            "naive": 0.6776,
+            "reversed": 0.5423,
+            "unshaped-reversed": 0.6363
+          },
+          "shot": "shots/jspdf-reshaper/invoice-line.png",
+          "source": "pdf"
+        },
+        "digits": {
+          "verdict": "mismatch",
+          "variant": null,
+          "distance": null,
+          "label": "Differs from the correct rendering and from every known failure pattern; needs human review",
+          "advice": "",
+          "nearest": "no-bidi",
+          "distances": {
+            "ok": 0.6829,
+            "unshaped": 0.7401,
+            "no-bidi": 0.557,
+            "naive": 0.5927,
+            "reversed": 0.6826,
+            "unshaped-reversed": 0.7581
+          },
+          "shot": "shots/jspdf-reshaper/digits.png",
+          "source": "pdf"
+        },
+        "persian": {
+          "verdict": "mismatch",
+          "variant": null,
+          "distance": null,
+          "label": "Differs from the correct rendering and from every known failure pattern; needs human review",
+          "advice": "",
+          "nearest": "no-bidi",
+          "distances": {
+            "ok": 0.6411,
+            "unshaped": 0.846,
+            "no-bidi": 0.6371,
+            "naive": 0.816
+          },
+          "shot": "shots/jspdf-reshaper/persian.png",
+          "source": "pdf"
+        },
+        "hebrew": {
+          "verdict": "fail",
+          "variant": "reversed",
+          "distance": 0.0234,
+          "label": "Whole line reversed: Arabic looks right but Latin text and numbers are mirrored",
+          "advice": "Do not reverse the whole string; run a real bidi algorithm that keeps LTR runs intact.",
+          "nearest": "reversed",
+          "distances": {
+            "ok": 0.1618,
+            "ltr-base": 0.6865,
+            "no-bidi": 0.6949,
+            "reversed": 0.0234
+          },
+          "shot": "shots/jspdf-reshaper/hebrew.png",
+          "source": "pdf"
+        },
+        "wrapping": {
+          "verdict": "mismatch",
+          "variant": null,
+          "distance": null,
+          "label": "Differs from the correct rendering and from every known failure pattern; needs human review",
+          "advice": "",
+          "nearest": "unshaped",
+          "distances": {
+            "ok": 1.1613,
+            "ltr-base": 1.2162,
+            "unshaped": 0.6881,
+            "no-bidi": 1.2326,
+            "naive": 0.7692
+          },
+          "shot": "shots/jspdf-reshaper/wrapping.png",
+          "source": "pdf"
+        }
+      }
+    },
+    {
+      "id": "pdfkit",
+      "library": "PDFKit",
+      "package": "pdfkit",
+      "ecosystem": "npm",
+      "category": "pdf",
+      "mode": "default",
+      "adapter": "adapters/node/pdfkit.mjs",
+      "version": "0.20.2",
+      "summary": "fail",
+      "passed": 0,
+      "judged": 8,
+      "cells": {
+        "connected": {
+          "verdict": "mismatch",
+          "variant": null,
+          "distance": null,
+          "label": "Differs from the correct rendering and from every known failure pattern; needs human review",
+          "advice": "",
+          "nearest": "ok",
+          "distances": {
+            "ok": 0.4414,
+            "unshaped": 0.8186,
+            "no-bidi": 0.615,
+            "naive": 0.8329
+          },
+          "shot": "shots/pdfkit/connected.png",
+          "source": "pdf"
+        },
+        "lam-alef": {
+          "verdict": "mismatch",
+          "variant": null,
+          "distance": null,
+          "label": "Differs from the correct rendering and from every known failure pattern; needs human review",
+          "advice": "",
+          "nearest": "no-bidi",
+          "distances": {
+            "ok": 0.5722,
+            "unshaped": 0.84,
+            "no-bidi": 0.5714,
+            "naive": 0.7885
+          },
+          "shot": "shots/pdfkit/lam-alef.png",
+          "source": "pdf"
+        },
+        "harakat": {
+          "verdict": "mismatch",
+          "variant": null,
+          "distance": null,
+          "label": "Differs from the correct rendering and from every known failure pattern; needs human review",
+          "advice": "",
+          "nearest": "ok",
+          "distances": {
+            "ok": 0.6517,
+            "unshaped": 0.8412,
+            "no-bidi": 0.6897,
+            "naive": 0.8019
+          },
+          "shot": "shots/pdfkit/harakat.png",
+          "source": "pdf"
+        },
+        "invoice-line": {
+          "verdict": "mismatch",
+          "variant": null,
+          "distance": null,
+          "label": "Differs from the correct rendering and from every known failure pattern; needs human review",
+          "advice": "",
+          "nearest": "ltr-base",
+          "distances": {
+            "ok": 0.7035,
+            "ltr-base": 0.2742,
+            "unshaped": 0.686,
+            "no-bidi": 0.3113,
+            "naive": 0.6401,
+            "reversed": 0.6373,
+            "unshaped-reversed": 0.6521
+          },
+          "shot": "shots/pdfkit/invoice-line.png",
+          "source": "pdf"
+        },
+        "digits": {
+          "verdict": "mismatch",
+          "variant": null,
+          "distance": null,
+          "label": "Differs from the correct rendering and from every known failure pattern; needs human review",
+          "advice": "",
+          "nearest": "no-bidi",
+          "distances": {
+            "ok": 0.6908,
+            "unshaped": 0.7325,
+            "no-bidi": 0.6065,
+            "naive": 0.6839,
+            "reversed": 0.6706,
+            "unshaped-reversed": 0.7275
+          },
+          "shot": "shots/pdfkit/digits.png",
+          "source": "pdf"
+        },
+        "persian": {
+          "verdict": "mismatch",
+          "variant": null,
+          "distance": null,
+          "label": "Differs from the correct rendering and from every known failure pattern; needs human review",
+          "advice": "",
+          "nearest": "ok",
+          "distances": {
+            "ok": 0.6443,
+            "unshaped": 0.7967,
+            "no-bidi": 0.6767,
+            "naive": 0.8293
+          },
+          "shot": "shots/pdfkit/persian.png",
+          "source": "pdf"
+        },
+        "hebrew": {
+          "verdict": "mismatch",
+          "variant": null,
+          "distance": null,
+          "label": "Differs from the correct rendering and from every known failure pattern; needs human review",
+          "advice": "",
+          "nearest": "no-bidi",
+          "distances": {
+            "ok": 0.6636,
+            "ltr-base": 0.5132,
+            "no-bidi": 0.4965,
+            "reversed": 0.661
+          },
+          "shot": "shots/pdfkit/hebrew.png",
+          "source": "pdf"
+        },
+        "wrapping": {
+          "verdict": "mismatch",
+          "variant": null,
+          "distance": null,
+          "label": "Differs from the correct rendering and from every known failure pattern; needs human review",
+          "advice": "",
+          "nearest": "ok",
+          "distances": {
+            "ok": 0.4508,
+            "ltr-base": 0.5199,
+            "unshaped": 1.0603,
+            "no-bidi": 0.5661,
+            "naive": 1.086
+          },
+          "shot": "shots/pdfkit/wrapping.png",
+          "source": "pdf"
+        }
+      }
+    },
+    {
+      "id": "pdf-lib",
+      "library": "pdf-lib",
+      "package": "pdf-lib",
+      "ecosystem": "npm",
+      "category": "pdf",
+      "mode": "default",
+      "adapter": "adapters/node/pdf-lib.mjs",
+      "version": "1.17.1",
+      "summary": "partial",
+      "passed": 2,
+      "judged": 8,
+      "cells": {
+        "connected": {
+          "verdict": "pass",
+          "variant": "ok",
+          "distance": 0.0034,
+          "label": "Correct: shaped and in Unicode Bidi order",
+          "advice": "",
+          "nearest": "ok",
+          "distances": {
+            "ok": 0.0034,
+            "unshaped": 0.7957,
+            "no-bidi": 0.631,
+            "naive": 0.8084
+          },
+          "shot": "shots/pdf-lib/connected.png",
+          "source": "pdf"
+        },
+        "lam-alef": {
+          "verdict": "pass",
+          "variant": "ok",
+          "distance": 0.0059,
+          "label": "Correct: shaped and in Unicode Bidi order",
+          "advice": "",
+          "nearest": "ok",
+          "distances": {
+            "ok": 0.0059,
+            "unshaped": 0.7746,
+            "no-bidi": 0.6554,
+            "naive": 0.7965
+          },
+          "shot": "shots/pdf-lib/lam-alef.png",
+          "source": "pdf"
+        },
+        "harakat": {
+          "verdict": "mismatch",
+          "variant": null,
+          "distance": null,
+          "label": "Differs from the correct rendering and from every known failure pattern; needs human review",
+          "advice": "",
+          "nearest": "ok",
+          "distances": {
+            "ok": 0.5745,
+            "unshaped": 0.8015,
+            "no-bidi": 0.6653,
+            "naive": 0.8376
+          },
+          "shot": "shots/pdf-lib/harakat.png",
+          "source": "pdf"
+        },
+        "invoice-line": {
+          "verdict": "fail",
+          "variant": "naive",
+          "distance": 0.0048,
+          "label": "Disconnected letters drawn left-to-right in typing order (no shaping, no bidi)",
+          "advice": "The library draws code points one by one: use a library with HarfBuzz shaping and bidi.",
+          "nearest": "naive",
+          "distances": {
+            "ok": 0.6696,
+            "ltr-base": 0.646,
+            "unshaped": 0.693,
+            "no-bidi": 0.6195,
+            "naive": 0.0048,
+            "reversed": 0.6346,
+            "unshaped-reversed": 0.6337
+          },
+          "shot": "shots/pdf-lib/invoice-line.png",
+          "source": "pdf"
+        },
+        "digits": {
+          "verdict": "fail",
+          "variant": "reversed",
+          "distance": 0.0037,
+          "label": "Whole line reversed: Arabic looks right but Latin text and numbers are mirrored",
+          "advice": "Do not reverse the whole string; run a real bidi algorithm that keeps LTR runs intact.",
+          "nearest": "reversed",
+          "distances": {
+            "ok": 0.2334,
+            "unshaped": 0.6061,
+            "no-bidi": 0.6366,
+            "naive": 0.7579,
+            "reversed": 0.0037,
+            "unshaped-reversed": 0.5656
+          },
+          "shot": "shots/pdf-lib/digits.png",
+          "source": "pdf"
+        },
+        "persian": {
+          "verdict": "mismatch",
+          "variant": null,
+          "distance": null,
+          "label": "Differs from the correct rendering and from every known failure pattern; needs human review",
+          "advice": "",
+          "nearest": "ok",
+          "distances": {
+            "ok": 0.413,
+            "unshaped": 0.7835,
+            "no-bidi": 0.6794,
+            "naive": 0.7955
+          },
+          "shot": "shots/pdf-lib/persian.png",
+          "source": "pdf"
+        },
+        "hebrew": {
+          "verdict": "fail",
+          "variant": "reversed",
+          "distance": 0.0234,
+          "label": "Whole line reversed: Arabic looks right but Latin text and numbers are mirrored",
+          "advice": "Do not reverse the whole string; run a real bidi algorithm that keeps LTR runs intact.",
+          "nearest": "reversed",
+          "distances": {
+            "ok": 0.1618,
+            "ltr-base": 0.6865,
+            "no-bidi": 0.6949,
+            "reversed": 0.0234
+          },
+          "shot": "shots/pdf-lib/hebrew.png",
+          "source": "pdf"
+        },
+        "wrapping": {
+          "verdict": "mismatch",
+          "variant": null,
+          "distance": null,
+          "label": "Differs from the correct rendering and from every known failure pattern; needs human review",
+          "advice": "",
+          "nearest": "ltr-base",
+          "distances": {
+            "ok": 0.5019,
+            "ltr-base": 0.3777,
+            "unshaped": 1.0671,
+            "no-bidi": 0.5555,
+            "naive": 1.0628
+          },
+          "shot": "shots/pdf-lib/wrapping.png",
+          "source": "pdf"
+        }
+      }
+    },
+    {
+      "id": "pdfmake",
+      "library": "pdfmake",
+      "package": "pdfmake",
+      "ecosystem": "npm",
+      "category": "pdf",
+      "mode": "default",
+      "adapter": "adapters/node/pdfmake.mjs",
+      "version": "0.3.13",
+      "summary": "fail",
+      "passed": 0,
+      "judged": 8,
+      "cells": {
+        "connected": {
+          "verdict": "mismatch",
+          "variant": null,
+          "distance": null,
+          "label": "Differs from the correct rendering and from every known failure pattern; needs human review",
+          "advice": "",
+          "nearest": "ok",
+          "distances": {
+            "ok": 0.4414,
+            "unshaped": 0.8186,
+            "no-bidi": 0.615,
+            "naive": 0.8329
+          },
+          "shot": "shots/pdfmake/connected.png",
+          "source": "pdf"
+        },
+        "lam-alef": {
+          "verdict": "mismatch",
+          "variant": null,
+          "distance": null,
+          "label": "Differs from the correct rendering and from every known failure pattern; needs human review",
+          "advice": "",
+          "nearest": "no-bidi",
+          "distances": {
+            "ok": 0.5722,
+            "unshaped": 0.84,
+            "no-bidi": 0.5714,
+            "naive": 0.7885
+          },
+          "shot": "shots/pdfmake/lam-alef.png",
+          "source": "pdf"
+        },
+        "harakat": {
+          "verdict": "mismatch",
+          "variant": null,
+          "distance": null,
+          "label": "Differs from the correct rendering and from every known failure pattern; needs human review",
+          "advice": "",
+          "nearest": "ok",
+          "distances": {
+            "ok": 0.6517,
+            "unshaped": 0.8412,
+            "no-bidi": 0.6897,
+            "naive": 0.8019
+          },
+          "shot": "shots/pdfmake/harakat.png",
+          "source": "pdf"
+        },
+        "invoice-line": {
+          "verdict": "mismatch",
+          "variant": null,
+          "distance": null,
+          "label": "Differs from the correct rendering and from every known failure pattern; needs human review",
+          "advice": "",
+          "nearest": "ltr-base",
+          "distances": {
+            "ok": 0.7035,
+            "ltr-base": 0.2742,
+            "unshaped": 0.686,
+            "no-bidi": 0.3113,
+            "naive": 0.6401,
+            "reversed": 0.6373,
+            "unshaped-reversed": 0.6521
+          },
+          "shot": "shots/pdfmake/invoice-line.png",
+          "source": "pdf"
+        },
+        "digits": {
+          "verdict": "mismatch",
+          "variant": null,
+          "distance": null,
+          "label": "Differs from the correct rendering and from every known failure pattern; needs human review",
+          "advice": "",
+          "nearest": "no-bidi",
+          "distances": {
+            "ok": 0.6908,
+            "unshaped": 0.7325,
+            "no-bidi": 0.6065,
+            "naive": 0.6839,
+            "reversed": 0.6706,
+            "unshaped-reversed": 0.7275
+          },
+          "shot": "shots/pdfmake/digits.png",
+          "source": "pdf"
+        },
+        "persian": {
+          "verdict": "mismatch",
+          "variant": null,
+          "distance": null,
+          "label": "Differs from the correct rendering and from every known failure pattern; needs human review",
+          "advice": "",
+          "nearest": "ok",
+          "distances": {
+            "ok": 0.6443,
+            "unshaped": 0.7967,
+            "no-bidi": 0.6767,
+            "naive": 0.8293
+          },
+          "shot": "shots/pdfmake/persian.png",
+          "source": "pdf"
+        },
+        "hebrew": {
+          "verdict": "mismatch",
+          "variant": null,
+          "distance": null,
+          "label": "Differs from the correct rendering and from every known failure pattern; needs human review",
+          "advice": "",
+          "nearest": "no-bidi",
+          "distances": {
+            "ok": 0.6636,
+            "ltr-base": 0.5132,
+            "no-bidi": 0.4965,
+            "reversed": 0.661
+          },
+          "shot": "shots/pdfmake/hebrew.png",
+          "source": "pdf"
+        },
+        "wrapping": {
+          "verdict": "mismatch",
+          "variant": null,
+          "distance": null,
+          "label": "Differs from the correct rendering and from every known failure pattern; needs human review",
+          "advice": "",
+          "nearest": "ok",
+          "distances": {
+            "ok": 0.4546,
+            "ltr-base": 0.5201,
+            "unshaped": 1.0611,
+            "no-bidi": 0.5647,
+            "naive": 1.0865
+          },
+          "shot": "shots/pdfmake/wrapping.png",
+          "source": "pdf"
+        }
+      }
+    },
+    {
+      "id": "react-pdf",
+      "library": "@react-pdf/renderer",
+      "package": "@react-pdf/renderer",
+      "ecosystem": "npm",
+      "category": "pdf",
+      "mode": "default",
+      "adapter": "adapters/node/react-pdf.mjs",
+      "version": "4.9.0",
+      "summary": "partial",
+      "passed": 4,
+      "judged": 8,
+      "cells": {
+        "connected": {
+          "verdict": "pass",
+          "variant": "ok",
+          "distance": 0.0107,
+          "label": "Correct: shaped and in Unicode Bidi order",
+          "advice": "",
+          "nearest": "ok",
+          "distances": {
+            "ok": 0.0107,
+            "unshaped": 0.7866,
+            "no-bidi": 0.623,
+            "naive": 0.8005
+          },
+          "shot": "shots/react-pdf/connected.png",
+          "source": "pdf"
+        },
+        "lam-alef": {
+          "verdict": "pass",
+          "variant": "ok",
+          "distance": 0.0121,
+          "label": "Correct: shaped and in Unicode Bidi order",
+          "advice": "",
+          "nearest": "ok",
+          "distances": {
+            "ok": 0.0121,
+            "unshaped": 0.7657,
+            "no-bidi": 0.6604,
+            "naive": 0.7868
+          },
+          "shot": "shots/react-pdf/lam-alef.png",
+          "source": "pdf"
+        },
+        "harakat": {
+          "verdict": "mismatch",
+          "variant": null,
+          "distance": null,
+          "label": "Differs from the correct rendering and from every known failure pattern; needs human review",
+          "advice": "",
+          "nearest": "ok",
+          "distances": {
+            "ok": 0.2695,
+            "unshaped": 0.8239,
+            "no-bidi": 0.7474,
+            "naive": 0.8358
+          },
+          "shot": "shots/react-pdf/harakat.png",
+          "source": "pdf"
+        },
+        "invoice-line": {
+          "verdict": "partial",
+          "variant": "ltr-base",
+          "distance": 0.0137,
+          "label": "Shaped and bidi-ordered, but with a left-to-right base direction",
+          "advice": "Set the paragraph/base direction to RTL (or start the line with an RLM).",
+          "nearest": "ltr-base",
+          "distances": {
+            "ok": 0.6939,
+            "ltr-base": 0.0137,
+            "unshaped": 0.7129,
+            "no-bidi": 0.3876,
+            "naive": 0.6432,
+            "reversed": 0.641,
+            "unshaped-reversed": 0.6647
+          },
+          "shot": "shots/react-pdf/invoice-line.png",
+          "source": "pdf"
+        },
+        "digits": {
+          "verdict": "pass",
+          "variant": "ok",
+          "distance": 0.0102,
+          "label": "Correct: shaped and in Unicode Bidi order",
+          "advice": "",
+          "nearest": "ok",
+          "distances": {
+            "ok": 0.0102,
+            "unshaped": 0.5511,
+            "no-bidi": 0.6544,
+            "naive": 0.7117,
+            "reversed": 0.2398,
+            "unshaped-reversed": 0.5836
+          },
+          "shot": "shots/react-pdf/digits.png",
+          "source": "pdf"
+        },
+        "persian": {
+          "verdict": "pass",
+          "variant": "ok",
+          "distance": 0.0054,
+          "label": "Correct: shaped and in Unicode Bidi order",
+          "advice": "",
+          "nearest": "ok",
+          "distances": {
+            "ok": 0.0054,
+            "unshaped": 0.814,
+            "no-bidi": 0.6644,
+            "naive": 0.8441
+          },
+          "shot": "shots/react-pdf/persian.png",
+          "source": "pdf"
+        },
+        "hebrew": {
+          "verdict": "partial",
+          "variant": "ltr-base",
+          "distance": 0.0134,
+          "label": "Shaped and bidi-ordered, but with a left-to-right base direction",
+          "advice": "Set the paragraph/base direction to RTL (or start the line with an RLM).",
+          "nearest": "ltr-base",
+          "distances": {
+            "ok": 0.6789,
+            "ltr-base": 0.0134,
+            "no-bidi": 0.55,
+            "reversed": 0.6848
+          },
+          "shot": "shots/react-pdf/hebrew.png",
+          "source": "pdf"
+        },
+        "wrapping": {
+          "verdict": "mismatch",
+          "variant": null,
+          "distance": null,
+          "label": "Differs from the correct rendering and from every known failure pattern; needs human review",
+          "advice": "",
+          "nearest": "ok",
+          "distances": {
+            "ok": 0.4328,
+            "ltr-base": 0.5799,
+            "unshaped": 1.0481,
+            "no-bidi": 0.6559,
+            "naive": 1.0824
+          },
+          "shot": "shots/react-pdf/wrapping.png",
+          "source": "pdf"
+        }
+      }
+    },
+    {
+      "id": "chrome-pdf",
+      "library": "Headless Chrome page.pdf()",
+      "package": "playwright-core",
+      "ecosystem": "npm",
+      "category": "pdf",
+      "mode": "escape-hatch",
+      "adapter": "adapters/node/chrome-pdf.mjs",
+      "version": "Chrome 156.0.8078.74",
+      "summary": "pass",
+      "passed": 8,
+      "judged": 8,
+      "cells": {
+        "connected": {
+          "verdict": "pass",
+          "variant": "ok",
+          "distance": 0.0068,
+          "label": "Correct: shaped and in Unicode Bidi order",
+          "advice": "",
+          "nearest": "ok",
+          "distances": {
+            "ok": 0.0068,
+            "unshaped": 0.7894,
+            "no-bidi": 0.6293,
+            "naive": 0.8033
+          },
+          "shot": "shots/chrome-pdf/connected.png",
+          "source": "pdf"
+        },
+        "lam-alef": {
+          "verdict": "pass",
+          "variant": "ok",
+          "distance": 0.0062,
+          "label": "Correct: shaped and in Unicode Bidi order",
+          "advice": "",
+          "nearest": "ok",
+          "distances": {
+            "ok": 0.0062,
+            "unshaped": 0.776,
+            "no-bidi": 0.647,
+            "naive": 0.7922
+          },
+          "shot": "shots/chrome-pdf/lam-alef.png",
+          "source": "pdf"
+        },
+        "harakat": {
+          "verdict": "pass",
+          "variant": "ok",
+          "distance": 0.0044,
+          "label": "Correct: shaped and in Unicode Bidi order",
+          "advice": "",
+          "nearest": "ok",
+          "distances": {
+            "ok": 0.0044,
+            "unshaped": 0.7533,
+            "no-bidi": 0.664,
+            "naive": 0.797
+          },
+          "shot": "shots/chrome-pdf/harakat.png",
+          "source": "pdf"
+        },
+        "invoice-line": {
+          "verdict": "pass",
+          "variant": "ok",
+          "distance": 0.0215,
+          "label": "Correct: shaped and in Unicode Bidi order",
+          "advice": "",
+          "nearest": "ok",
+          "distances": {
+            "ok": 0.0215,
+            "ltr-base": 0.6848,
+            "unshaped": 0.5558,
+            "no-bidi": 0.7391,
+            "naive": 0.6569,
+            "reversed": 0.4581,
+            "unshaped-reversed": 0.6351
+          },
+          "shot": "shots/chrome-pdf/invoice-line.png",
+          "source": "pdf"
+        },
+        "digits": {
+          "verdict": "pass",
+          "variant": "ok",
+          "distance": 0.0046,
+          "label": "Correct: shaped and in Unicode Bidi order",
+          "advice": "",
+          "nearest": "ok",
+          "distances": {
+            "ok": 0.0046,
+            "unshaped": 0.5717,
+            "no-bidi": 0.6415,
+            "naive": 0.7208,
+            "reversed": 0.2329,
+            "unshaped-reversed": 0.6004
+          },
+          "shot": "shots/chrome-pdf/digits.png",
+          "source": "pdf"
+        },
+        "persian": {
+          "verdict": "pass",
+          "variant": "ok",
+          "distance": 0.0081,
+          "label": "Correct: shaped and in Unicode Bidi order",
+          "advice": "",
+          "nearest": "ok",
+          "distances": {
+            "ok": 0.0081,
+            "unshaped": 0.8095,
+            "no-bidi": 0.6583,
+            "naive": 0.8403
+          },
+          "shot": "shots/chrome-pdf/persian.png",
+          "source": "pdf"
+        },
+        "hebrew": {
+          "verdict": "pass",
+          "variant": "ok",
+          "distance": 0.0091,
+          "label": "Correct: shaped and in Unicode Bidi order",
+          "advice": "",
+          "nearest": "ok",
+          "distances": {
+            "ok": 0.0091,
+            "ltr-base": 0.6653,
+            "no-bidi": 0.6849,
+            "reversed": 0.1469
+          },
+          "shot": "shots/chrome-pdf/hebrew.png",
+          "source": "pdf"
+        },
+        "wrapping": {
+          "verdict": "pass",
+          "variant": "ok",
+          "distance": 0.0037,
+          "label": "Correct: shaped and in Unicode Bidi order",
+          "advice": "",
+          "nearest": "ok",
+          "distances": {
+            "ok": 0.0037,
+            "ltr-base": 0.3123,
+            "unshaped": 1.0293,
+            "no-bidi": 0.6344,
+            "naive": 1.0604
+          },
+          "shot": "shots/chrome-pdf/wrapping.png",
+          "source": "pdf"
+        }
+      }
+    },
+    {
+      "id": "satori",
+      "library": "satori (@vercel/og engine) + resvg",
+      "package": "satori",
+      "ecosystem": "npm",
+      "category": "og-image",
+      "mode": "default",
+      "adapter": "adapters/node/satori.mjs",
+      "version": "0.63.2",
+      "summary": "partial",
+      "passed": 7,
+      "judged": 8,
+      "cells": {
+        "connected": {
+          "verdict": "pass",
+          "variant": "ok",
+          "distance": 0.003,
+          "label": "Correct: shaped and in Unicode Bidi order",
+          "advice": "",
+          "nearest": "ok",
+          "distances": {
+            "ok": 0.003,
+            "unshaped": 0.7982,
+            "no-bidi": 0.6344,
+            "naive": 0.8092
+          },
+          "shot": "shots/satori/connected.png",
+          "source": "png"
+        },
+        "lam-alef": {
+          "verdict": "pass",
+          "variant": "ok",
+          "distance": 0.0098,
+          "label": "Correct: shaped and in Unicode Bidi order",
+          "advice": "",
+          "nearest": "ok",
+          "distances": {
+            "ok": 0.0098,
+            "unshaped": 0.7774,
+            "no-bidi": 0.6591,
+            "naive": 0.7957
+          },
+          "shot": "shots/satori/lam-alef.png",
+          "source": "png"
+        },
+        "harakat": {
+          "verdict": "mismatch",
+          "variant": null,
+          "distance": null,
+          "label": "Differs from the correct rendering and from every known failure pattern; needs human review",
+          "advice": "",
+          "nearest": "ok",
+          "distances": {
+            "ok": 0.5614,
+            "unshaped": 0.972,
+            "no-bidi": 0.8438,
+            "naive": 0.9513
+          },
+          "shot": "shots/satori/harakat.png",
+          "source": "png"
+        },
+        "invoice-line": {
+          "verdict": "pass",
+          "variant": "ok",
+          "distance": 0.0246,
+          "label": "Correct: shaped and in Unicode Bidi order",
+          "advice": "",
+          "nearest": "ok",
+          "distances": {
+            "ok": 0.0246,
+            "ltr-base": 0.6831,
+            "unshaped": 0.5734,
+            "no-bidi": 0.7528,
+            "naive": 0.6681,
+            "reversed": 0.4684,
+            "unshaped-reversed": 0.6565
+          },
+          "shot": "shots/satori/invoice-line.png",
+          "source": "png"
+        },
+        "digits": {
+          "verdict": "pass",
+          "variant": "ok",
+          "distance": 0.0082,
+          "label": "Correct: shaped and in Unicode Bidi order",
+          "advice": "",
+          "nearest": "ok",
+          "distances": {
+            "ok": 0.0082,
+            "unshaped": 0.5767,
+            "no-bidi": 0.655,
+            "naive": 0.7187,
+            "reversed": 0.2352,
+            "unshaped-reversed": 0.5982
+          },
+          "shot": "shots/satori/digits.png",
+          "source": "png"
+        },
+        "persian": {
+          "verdict": "pass",
+          "variant": "ok",
+          "distance": 0.0163,
+          "label": "Correct: shaped and in Unicode Bidi order",
+          "advice": "",
+          "nearest": "ok",
+          "distances": {
+            "ok": 0.0163,
+            "unshaped": 0.8214,
+            "no-bidi": 0.6732,
+            "naive": 0.8365
+          },
+          "shot": "shots/satori/persian.png",
+          "source": "png"
+        },
+        "hebrew": {
+          "verdict": "pass",
+          "variant": "ok",
+          "distance": 0.028,
+          "label": "Correct: shaped and in Unicode Bidi order",
+          "advice": "",
+          "nearest": "ok",
+          "distances": {
+            "ok": 0.028,
+            "ltr-base": 0.6836,
+            "no-bidi": 0.6873,
+            "reversed": 0.1648
+          },
+          "shot": "shots/satori/hebrew.png",
+          "source": "png"
+        },
+        "wrapping": {
+          "verdict": "pass",
+          "variant": "ok",
+          "distance": 0.0192,
+          "label": "Correct: shaped and in Unicode Bidi order",
+          "advice": "",
+          "nearest": "ok",
+          "distances": {
+            "ok": 0.0192,
+            "ltr-base": 0.3241,
+            "unshaped": 1.043,
+            "no-bidi": 0.6434,
+            "naive": 1.0706
+          },
+          "shot": "shots/satori/wrapping.png",
+          "source": "png"
+        }
+      }
+    },
+    {
+      "id": "napi-canvas",
+      "library": "@napi-rs/canvas",
+      "package": "@napi-rs/canvas",
+      "ecosystem": "npm",
+      "category": "og-image",
+      "mode": "default",
+      "adapter": "adapters/node/napi-canvas.mjs",
+      "version": "1.1.0",
+      "summary": "pass",
+      "passed": 7,
+      "judged": 7,
+      "cells": {
+        "connected": {
+          "verdict": "pass",
+          "variant": "ok",
+          "distance": 0.0083,
+          "label": "Correct: shaped and in Unicode Bidi order",
+          "advice": "",
+          "nearest": "ok",
+          "distances": {
+            "ok": 0.0083,
+            "unshaped": 0.7974,
+            "no-bidi": 0.6375,
+            "naive": 0.8092
+          },
+          "shot": "shots/napi-canvas/connected.png",
+          "source": "png"
+        },
+        "lam-alef": {
+          "verdict": "pass",
+          "variant": "ok",
+          "distance": 0.0051,
+          "label": "Correct: shaped and in Unicode Bidi order",
+          "advice": "",
+          "nearest": "ok",
+          "distances": {
+            "ok": 0.0051,
+            "unshaped": 0.7792,
+            "no-bidi": 0.6611,
+            "naive": 0.8002
+          },
+          "shot": "shots/napi-canvas/lam-alef.png",
+          "source": "png"
+        },
+        "harakat": {
+          "verdict": "pass",
+          "variant": "ok",
+          "distance": 0.0034,
+          "label": "Correct: shaped and in Unicode Bidi order",
+          "advice": "",
+          "nearest": "ok",
+          "distances": {
+            "ok": 0.0034,
+            "unshaped": 0.7662,
+            "no-bidi": 0.6792,
+            "naive": 0.8102
+          },
+          "shot": "shots/napi-canvas/harakat.png",
+          "source": "png"
+        },
+        "invoice-line": {
+          "verdict": "pass",
+          "variant": "ok",
+          "distance": 0.0085,
+          "label": "Correct: shaped and in Unicode Bidi order",
+          "advice": "",
+          "nearest": "ok",
+          "distances": {
+            "ok": 0.0085,
+            "ltr-base": 0.6879,
+            "unshaped": 0.5824,
+            "no-bidi": 0.7579,
+            "naive": 0.6701,
+            "reversed": 0.4599,
+            "unshaped-reversed": 0.6486
+          },
+          "shot": "shots/napi-canvas/invoice-line.png",
+          "source": "png"
+        },
+        "digits": {
+          "verdict": "pass",
+          "variant": "ok",
+          "distance": 0.0044,
+          "label": "Correct: shaped and in Unicode Bidi order",
+          "advice": "",
+          "nearest": "ok",
+          "distances": {
+            "ok": 0.0044,
+            "unshaped": 0.5675,
+            "no-bidi": 0.6509,
+            "naive": 0.725,
+            "reversed": 0.2346,
+            "unshaped-reversed": 0.6005
+          },
+          "shot": "shots/napi-canvas/digits.png",
+          "source": "png"
+        },
+        "persian": {
+          "verdict": "pass",
+          "variant": "ok",
+          "distance": 0.0033,
+          "label": "Correct: shaped and in Unicode Bidi order",
+          "advice": "",
+          "nearest": "ok",
+          "distances": {
+            "ok": 0.0033,
+            "unshaped": 0.8167,
+            "no-bidi": 0.6671,
+            "naive": 0.8459
+          },
+          "shot": "shots/napi-canvas/persian.png",
+          "source": "png"
+        },
+        "hebrew": {
+          "verdict": "pass",
+          "variant": "ok",
+          "distance": 0.0075,
+          "label": "Correct: shaped and in Unicode Bidi order",
+          "advice": "",
+          "nearest": "ok",
+          "distances": {
+            "ok": 0.0075,
+            "ltr-base": 0.6785,
+            "no-bidi": 0.6944,
+            "reversed": 0.1493
+          },
+          "shot": "shots/napi-canvas/hebrew.png",
+          "source": "png"
+        },
+        "wrapping": {
+          "verdict": "n/a",
+          "reason": "the canvas API has no line wrapping"
+        }
+      }
+    },
+    {
+      "id": "chartjs",
+      "library": "Chart.js on @napi-rs/canvas",
+      "package": "chart.js",
+      "ecosystem": "npm",
+      "category": "chart",
+      "mode": "default",
+      "adapter": "adapters/node/chartjs.mjs",
+      "version": "4.6.1",
+      "summary": "partial",
+      "passed": 5,
+      "judged": 7,
+      "cells": {
+        "connected": {
+          "verdict": "pass",
+          "variant": "ok",
+          "distance": 0.0412,
+          "label": "Correct: shaped and in Unicode Bidi order",
+          "advice": "",
+          "nearest": "ok",
+          "distances": {
+            "ok": 0.0412,
+            "unshaped": 0.7877,
+            "no-bidi": 0.624,
+            "naive": 0.7897
+          },
+          "shot": "shots/chartjs/connected.png",
+          "source": "png"
+        },
+        "lam-alef": {
+          "verdict": "pass",
+          "variant": "ok",
+          "distance": 0.0386,
+          "label": "Correct: shaped and in Unicode Bidi order",
+          "advice": "",
+          "nearest": "ok",
+          "distances": {
+            "ok": 0.0386,
+            "unshaped": 0.7782,
+            "no-bidi": 0.6417,
+            "naive": 0.7878
+          },
+          "shot": "shots/chartjs/lam-alef.png",
+          "source": "png"
+        },
+        "harakat": {
+          "verdict": "pass",
+          "variant": "ok",
+          "distance": 0.0468,
+          "label": "Correct: shaped and in Unicode Bidi order",
+          "advice": "",
+          "nearest": "ok",
+          "distances": {
+            "ok": 0.0468,
+            "unshaped": 0.7422,
+            "no-bidi": 0.6385,
+            "naive": 0.7846
+          },
+          "shot": "shots/chartjs/harakat.png",
+          "source": "png"
+        },
+        "invoice-line": {
+          "verdict": "partial",
+          "variant": "ltr-base",
+          "distance": 0.0393,
+          "label": "Shaped and bidi-ordered, but with a left-to-right base direction",
+          "advice": "Set the paragraph/base direction to RTL (or start the line with an RLM).",
+          "nearest": "ltr-base",
+          "distances": {
+            "ok": 0.6764,
+            "ltr-base": 0.0393,
+            "unshaped": 0.6772,
+            "no-bidi": 0.3467,
+            "naive": 0.6133,
+            "reversed": 0.6301,
+            "unshaped-reversed": 0.6317
+          },
+          "shot": "shots/chartjs/invoice-line.png",
+          "source": "png"
+        },
+        "digits": {
+          "verdict": "pass",
+          "variant": "ok",
+          "distance": 0.0334,
+          "label": "Correct: shaped and in Unicode Bidi order",
+          "advice": "",
+          "nearest": "ok",
+          "distances": {
+            "ok": 0.0334,
+            "unshaped": 0.5561,
+            "no-bidi": 0.6318,
+            "naive": 0.7123,
+            "reversed": 0.2475,
+            "unshaped-reversed": 0.5813
+          },
+          "shot": "shots/chartjs/digits.png",
+          "source": "png"
+        },
+        "persian": {
+          "verdict": "pass",
+          "variant": "ok",
+          "distance": 0.0402,
+          "label": "Correct: shaped and in Unicode Bidi order",
+          "advice": "",
+          "nearest": "ok",
+          "distances": {
+            "ok": 0.0402,
+            "unshaped": 0.8154,
+            "no-bidi": 0.6706,
+            "naive": 0.8361
+          },
+          "shot": "shots/chartjs/persian.png",
+          "source": "png"
+        },
+        "hebrew": {
+          "verdict": "partial",
+          "variant": "ltr-base",
+          "distance": 0.0535,
+          "label": "Shaped and bidi-ordered, but with a left-to-right base direction",
+          "advice": "Set the paragraph/base direction to RTL (or start the line with an RLM).",
+          "nearest": "ltr-base",
+          "distances": {
+            "ok": 0.6665,
+            "ltr-base": 0.0535,
+            "no-bidi": 0.5399,
+            "reversed": 0.6734
+          },
+          "shot": "shots/chartjs/hebrew.png",
+          "source": "png"
+        },
+        "wrapping": {
+          "verdict": "n/a",
+          "reason": "chart titles do not wrap automatically"
+        }
+      }
+    },
+    {
+      "id": "reportlab",
+      "library": "ReportLab",
+      "package": "reportlab",
+      "ecosystem": "pypi",
+      "category": "pdf",
+      "mode": "default",
+      "adapter": "adapters/python/reportlab_adapter.py",
+      "version": "5.1.0",
+      "summary": "fail",
+      "passed": 0,
+      "judged": 8,
+      "cells": {
+        "connected": {
+          "verdict": "fail",
+          "variant": "naive",
+          "distance": 0.0013,
+          "label": "Disconnected letters drawn left-to-right in typing order (no shaping, no bidi)",
+          "advice": "The library draws code points one by one: use a library with HarfBuzz shaping and bidi.",
+          "nearest": "naive",
+          "distances": {
+            "ok": 0.8068,
+            "unshaped": 0.6457,
+            "no-bidi": 0.7128,
+            "naive": 0.0013
+          },
+          "shot": "shots/reportlab/connected.png",
+          "source": "pdf"
+        },
+        "lam-alef": {
+          "verdict": "fail",
+          "variant": "naive",
+          "distance": 0.0023,
+          "label": "Disconnected letters drawn left-to-right in typing order (no shaping, no bidi)",
+          "advice": "The library draws code points one by one: use a library with HarfBuzz shaping and bidi.",
+          "nearest": "naive",
+          "distances": {
+            "ok": 0.7969,
+            "unshaped": 0.6881,
+            "no-bidi": 0.7577,
+            "naive": 0.0023
+          },
+          "shot": "shots/reportlab/lam-alef.png",
+          "source": "pdf"
+        },
+        "harakat": {
+          "verdict": "mismatch",
+          "variant": null,
+          "distance": null,
+          "label": "Differs from the correct rendering and from every known failure pattern; needs human review",
+          "advice": "",
+          "nearest": "naive",
+          "distances": {
+            "ok": 0.9789,
+            "unshaped": 0.8696,
+            "no-bidi": 0.9239,
+            "naive": 0.8282
+          },
+          "shot": "shots/reportlab/harakat.png",
+          "source": "pdf"
+        },
+        "invoice-line": {
+          "verdict": "fail",
+          "variant": "naive",
+          "distance": 0.0048,
+          "label": "Disconnected letters drawn left-to-right in typing order (no shaping, no bidi)",
+          "advice": "The library draws code points one by one: use a library with HarfBuzz shaping and bidi.",
+          "nearest": "naive",
+          "distances": {
+            "ok": 0.6696,
+            "ltr-base": 0.646,
+            "unshaped": 0.693,
+            "no-bidi": 0.6195,
+            "naive": 0.0048,
+            "reversed": 0.6346,
+            "unshaped-reversed": 0.6337
+          },
+          "shot": "shots/reportlab/invoice-line.png",
+          "source": "pdf"
+        },
+        "digits": {
+          "verdict": "fail",
+          "variant": "naive",
+          "distance": 0.0009,
+          "label": "Disconnected letters drawn left-to-right in typing order (no shaping, no bidi)",
+          "advice": "The library draws code points one by one: use a library with HarfBuzz shaping and bidi.",
+          "nearest": "naive",
+          "distances": {
+            "ok": 0.7198,
+            "unshaped": 0.6724,
+            "no-bidi": 0.6347,
+            "naive": 0.0009,
+            "reversed": 0.7551,
+            "unshaped-reversed": 0.6815
+          },
+          "shot": "shots/reportlab/digits.png",
+          "source": "pdf"
+        },
+        "persian": {
+          "verdict": "fail",
+          "variant": "naive",
+          "distance": 0.0039,
+          "label": "Disconnected letters drawn left-to-right in typing order (no shaping, no bidi)",
+          "advice": "The library draws code points one by one: use a library with HarfBuzz shaping and bidi.",
+          "nearest": "naive",
+          "distances": {
+            "ok": 0.841,
+            "unshaped": 0.6519,
+            "no-bidi": 0.6603,
+            "naive": 0.0039
+          },
+          "shot": "shots/reportlab/persian.png",
+          "source": "pdf"
+        },
+        "hebrew": {
+          "verdict": "fail",
+          "variant": "no-bidi",
+          "distance": 0.0224,
+          "label": "Letters joined but drawn left-to-right in typing order (no bidi reordering)",
+          "advice": "Apply the Unicode Bidi Algorithm (e.g. bidi-js / python-bidi get_display) or set RTL direction.",
+          "nearest": "no-bidi",
+          "distances": {
+            "ok": 0.6918,
+            "ltr-base": 0.5547,
+            "no-bidi": 0.0224,
+            "reversed": 0.6892
+          },
+          "shot": "shots/reportlab/hebrew.png",
+          "source": "pdf"
+        },
+        "wrapping": {
+          "verdict": "mismatch",
+          "variant": null,
+          "distance": null,
+          "label": "Differs from the correct rendering and from every known failure pattern; needs human review",
+          "advice": "",
+          "nearest": "naive",
+          "distances": {
+            "ok": 1.044,
+            "ltr-base": 1.0928,
+            "unshaped": 0.5432,
+            "no-bidi": 1.0764,
+            "naive": 0.4252
+          },
+          "shot": "shots/reportlab/wrapping.png",
+          "source": "pdf"
+        }
+      }
+    },
+    {
+      "id": "reportlab-reshaper",
+      "library": "ReportLab + arabic_reshaper + python-bidi",
+      "package": "reportlab",
+      "ecosystem": "pypi",
+      "category": "pdf",
+      "mode": "workaround",
+      "adapter": "adapters/python/reportlab_adapter.py --reshaper",
+      "version": "5.1.0 + arabic-reshaper 3.1.0 + python-bidi 0.6.12",
+      "summary": "partial",
+      "passed": 6,
+      "judged": 8,
+      "cells": {
+        "connected": {
+          "verdict": "pass",
+          "variant": "ok",
+          "distance": 0.0034,
+          "label": "Correct: shaped and in Unicode Bidi order",
+          "advice": "",
+          "nearest": "ok",
+          "distances": {
+            "ok": 0.0034,
+            "unshaped": 0.7957,
+            "no-bidi": 0.631,
+            "naive": 0.8084
+          },
+          "shot": "shots/reportlab-reshaper/connected.png",
+          "source": "pdf"
+        },
+        "lam-alef": {
+          "verdict": "pass",
+          "variant": "ok",
+          "distance": 0.0059,
+          "label": "Correct: shaped and in Unicode Bidi order",
+          "advice": "",
+          "nearest": "ok",
+          "distances": {
+            "ok": 0.0059,
+            "unshaped": 0.7746,
+            "no-bidi": 0.6554,
+            "naive": 0.7965
+          },
+          "shot": "shots/reportlab-reshaper/lam-alef.png",
+          "source": "pdf"
+        },
+        "harakat": {
+          "verdict": "mismatch",
+          "variant": null,
+          "distance": null,
+          "label": "Differs from the correct rendering and from every known failure pattern; needs human review",
+          "advice": "",
+          "nearest": "ok",
+          "distances": {
+            "ok": 0.5626,
+            "unshaped": 0.584,
+            "no-bidi": 0.7211,
+            "naive": 0.649
+          },
+          "shot": "shots/reportlab-reshaper/harakat.png",
+          "source": "pdf"
+        },
+        "invoice-line": {
+          "verdict": "pass",
+          "variant": "ok",
+          "distance": 0.0092,
+          "label": "Correct: shaped and in Unicode Bidi order",
+          "advice": "",
+          "nearest": "ok",
+          "distances": {
+            "ok": 0.0092,
+            "ltr-base": 0.6841,
+            "unshaped": 0.5711,
+            "no-bidi": 0.7557,
+            "naive": 0.6689,
+            "reversed": 0.4427,
+            "unshaped-reversed": 0.6407
+          },
+          "shot": "shots/reportlab-reshaper/invoice-line.png",
+          "source": "pdf"
+        },
+        "digits": {
+          "verdict": "pass",
+          "variant": "ok",
+          "distance": 0.0035,
+          "label": "Correct: shaped and in Unicode Bidi order",
+          "advice": "",
+          "nearest": "ok",
+          "distances": {
+            "ok": 0.0035,
+            "unshaped": 0.5605,
+            "no-bidi": 0.6473,
+            "naive": 0.7223,
+            "reversed": 0.2325,
+            "unshaped-reversed": 0.5941
+          },
+          "shot": "shots/reportlab-reshaper/digits.png",
+          "source": "pdf"
+        },
+        "persian": {
+          "verdict": "pass",
+          "variant": "ok",
+          "distance": 0.002,
+          "label": "Correct: shaped and in Unicode Bidi order",
+          "advice": "",
+          "nearest": "ok",
+          "distances": {
+            "ok": 0.002,
+            "unshaped": 0.8147,
+            "no-bidi": 0.6643,
+            "naive": 0.8417
+          },
+          "shot": "shots/reportlab-reshaper/persian.png",
+          "source": "pdf"
+        },
+        "hebrew": {
+          "verdict": "pass",
+          "variant": "ok",
+          "distance": 0.0233,
+          "label": "Correct: shaped and in Unicode Bidi order",
+          "advice": "",
+          "nearest": "ok",
+          "distances": {
+            "ok": 0.0233,
+            "ltr-base": 0.6786,
+            "no-bidi": 0.6983,
+            "reversed": 0.1607
+          },
+          "shot": "shots/reportlab-reshaper/hebrew.png",
+          "source": "pdf"
+        },
+        "wrapping": {
+          "verdict": "mismatch",
+          "variant": null,
+          "distance": null,
+          "label": "Differs from the correct rendering and from every known failure pattern; needs human review",
+          "advice": "",
+          "nearest": "ok",
+          "distances": {
+            "ok": 0.512,
+            "ltr-base": 0.5687,
+            "unshaped": 1.0259,
+            "no-bidi": 0.6123,
+            "naive": 1.0974
+          },
+          "shot": "shots/reportlab-reshaper/wrapping.png",
+          "source": "pdf"
+        }
+      }
+    },
+    {
+      "id": "fpdf2",
+      "library": "fpdf2",
+      "package": "fpdf2",
+      "ecosystem": "pypi",
+      "category": "pdf",
+      "mode": "default",
+      "adapter": "adapters/python/fpdf2_adapter.py",
+      "version": "2.9.0",
+      "summary": "fail",
+      "passed": 0,
+      "judged": 8,
+      "cells": {
+        "connected": {
+          "verdict": "fail",
+          "variant": "naive",
+          "distance": 0.0109,
+          "label": "Disconnected letters drawn left-to-right in typing order (no shaping, no bidi)",
+          "advice": "The library draws code points one by one: use a library with HarfBuzz shaping and bidi.",
+          "nearest": "naive",
+          "distances": {
+            "ok": 0.8129,
+            "unshaped": 0.6543,
+            "no-bidi": 0.7243,
+            "naive": 0.0109
+          },
+          "shot": "shots/fpdf2/connected.png",
+          "source": "pdf"
+        },
+        "lam-alef": {
+          "verdict": "fail",
+          "variant": "naive",
+          "distance": 0.0143,
+          "label": "Disconnected letters drawn left-to-right in typing order (no shaping, no bidi)",
+          "advice": "The library draws code points one by one: use a library with HarfBuzz shaping and bidi.",
+          "nearest": "naive",
+          "distances": {
+            "ok": 0.8065,
+            "unshaped": 0.6944,
+            "no-bidi": 0.7689,
+            "naive": 0.0143
+          },
+          "shot": "shots/fpdf2/lam-alef.png",
+          "source": "pdf"
+        },
+        "harakat": {
+          "verdict": "mismatch",
+          "variant": null,
+          "distance": null,
+          "label": "Differs from the correct rendering and from every known failure pattern; needs human review",
+          "advice": "",
+          "nearest": "naive",
+          "distances": {
+            "ok": 0.978,
+            "unshaped": 0.8719,
+            "no-bidi": 0.9279,
+            "naive": 0.8357
+          },
+          "shot": "shots/fpdf2/harakat.png",
+          "source": "pdf"
+        },
+        "invoice-line": {
+          "verdict": "fail",
+          "variant": "naive",
+          "distance": 0.0155,
+          "label": "Disconnected letters drawn left-to-right in typing order (no shaping, no bidi)",
+          "advice": "The library draws code points one by one: use a library with HarfBuzz shaping and bidi.",
+          "nearest": "naive",
+          "distances": {
+            "ok": 0.6638,
+            "ltr-base": 0.637,
+            "unshaped": 0.6995,
+            "no-bidi": 0.6251,
+            "naive": 0.0155,
+            "reversed": 0.6316,
+            "unshaped-reversed": 0.6425
+          },
+          "shot": "shots/fpdf2/invoice-line.png",
+          "source": "pdf"
+        },
+        "digits": {
+          "verdict": "fail",
+          "variant": "naive",
+          "distance": 0.0133,
+          "label": "Disconnected letters drawn left-to-right in typing order (no shaping, no bidi)",
+          "advice": "The library draws code points one by one: use a library with HarfBuzz shaping and bidi.",
+          "nearest": "naive",
+          "distances": {
+            "ok": 0.7276,
+            "unshaped": 0.6788,
+            "no-bidi": 0.6461,
+            "naive": 0.0133,
+            "reversed": 0.7623,
+            "unshaped-reversed": 0.6873
+          },
+          "shot": "shots/fpdf2/digits.png",
+          "source": "pdf"
+        },
+        "persian": {
+          "verdict": "fail",
+          "variant": "naive",
+          "distance": 0.0065,
+          "label": "Disconnected letters drawn left-to-right in typing order (no shaping, no bidi)",
+          "advice": "The library draws code points one by one: use a library with HarfBuzz shaping and bidi.",
+          "nearest": "naive",
+          "distances": {
+            "ok": 0.8365,
+            "unshaped": 0.6505,
+            "no-bidi": 0.6643,
+            "naive": 0.0065
+          },
+          "shot": "shots/fpdf2/persian.png",
+          "source": "pdf"
+        },
+        "hebrew": {
+          "verdict": "fail",
+          "variant": "no-bidi",
+          "distance": 0.0068,
+          "label": "Letters joined but drawn left-to-right in typing order (no bidi reordering)",
+          "advice": "Apply the Unicode Bidi Algorithm (e.g. bidi-js / python-bidi get_display) or set RTL direction.",
+          "nearest": "no-bidi",
+          "distances": {
+            "ok": 0.6815,
+            "ltr-base": 0.5445,
+            "no-bidi": 0.0068,
+            "reversed": 0.6799
+          },
+          "shot": "shots/fpdf2/hebrew.png",
+          "source": "pdf"
+        },
+        "wrapping": {
+          "verdict": "mismatch",
+          "variant": null,
+          "distance": null,
+          "label": "Differs from the correct rendering and from every known failure pattern; needs human review",
+          "advice": "",
+          "nearest": "naive",
+          "distances": {
+            "ok": 1.0376,
+            "ltr-base": 1.0881,
+            "unshaped": 0.537,
+            "no-bidi": 1.0723,
+            "naive": 0.4301
+          },
+          "shot": "shots/fpdf2/wrapping.png",
+          "source": "pdf"
+        }
+      }
+    },
+    {
+      "id": "fpdf2-shaping",
+      "library": "fpdf2 with set_text_shaping()",
+      "package": "fpdf2",
+      "ecosystem": "pypi",
+      "category": "pdf",
+      "mode": "builtin-option",
+      "adapter": "adapters/python/fpdf2_adapter.py --shaping",
+      "version": "2.9.0",
+      "summary": "partial",
+      "passed": 7,
+      "judged": 8,
+      "cells": {
+        "connected": {
+          "verdict": "pass",
+          "variant": "ok",
+          "distance": 0.0126,
+          "label": "Correct: shaped and in Unicode Bidi order",
+          "advice": "",
+          "nearest": "ok",
+          "distances": {
+            "ok": 0.0126,
+            "unshaped": 0.7839,
+            "no-bidi": 0.6252,
+            "naive": 0.7984
+          },
+          "shot": "shots/fpdf2-shaping/connected.png",
+          "source": "pdf"
+        },
+        "lam-alef": {
+          "verdict": "pass",
+          "variant": "ok",
+          "distance": 0.013,
+          "label": "Correct: shaped and in Unicode Bidi order",
+          "advice": "",
+          "nearest": "ok",
+          "distances": {
+            "ok": 0.013,
+            "unshaped": 0.7683,
+            "no-bidi": 0.6661,
+            "naive": 0.7872
+          },
+          "shot": "shots/fpdf2-shaping/lam-alef.png",
+          "source": "pdf"
+        },
+        "harakat": {
+          "verdict": "mismatch",
+          "variant": null,
+          "distance": null,
+          "label": "Differs from the correct rendering and from every known failure pattern; needs human review",
+          "advice": "",
+          "nearest": "unshaped",
+          "distances": {
+            "ok": 0.8121,
+            "unshaped": 0.485,
+            "no-bidi": 0.9657,
+            "naive": 0.8659
+          },
+          "shot": "shots/fpdf2-shaping/harakat.png",
+          "source": "pdf"
+        },
+        "invoice-line": {
+          "verdict": "pass",
+          "variant": "ok",
+          "distance": 0.005,
+          "label": "Correct: shaped and in Unicode Bidi order",
+          "advice": "",
+          "nearest": "ok",
+          "distances": {
+            "ok": 0.005,
+            "ltr-base": 0.6854,
+            "unshaped": 0.5625,
+            "no-bidi": 0.7521,
+            "naive": 0.6698,
+            "reversed": 0.4519,
+            "unshaped-reversed": 0.6382
+          },
+          "shot": "shots/fpdf2-shaping/invoice-line.png",
+          "source": "pdf"
+        },
+        "digits": {
+          "verdict": "pass",
+          "variant": "ok",
+          "distance": 0.0132,
+          "label": "Correct: shaped and in Unicode Bidi order",
+          "advice": "",
+          "nearest": "ok",
+          "distances": {
+            "ok": 0.0132,
+            "unshaped": 0.553,
+            "no-bidi": 0.6551,
+            "naive": 0.7134,
+            "reversed": 0.2417,
+            "unshaped-reversed": 0.5882
+          },
+          "shot": "shots/fpdf2-shaping/digits.png",
+          "source": "pdf"
+        },
+        "persian": {
+          "verdict": "pass",
+          "variant": "ok",
+          "distance": 0.0111,
+          "label": "Correct: shaped and in Unicode Bidi order",
+          "advice": "",
+          "nearest": "ok",
+          "distances": {
+            "ok": 0.0111,
+            "unshaped": 0.813,
+            "no-bidi": 0.663,
+            "naive": 0.8477
+          },
+          "shot": "shots/fpdf2-shaping/persian.png",
+          "source": "pdf"
+        },
+        "hebrew": {
+          "verdict": "pass",
+          "variant": "ok",
+          "distance": 0.0076,
+          "label": "Correct: shaped and in Unicode Bidi order",
+          "advice": "",
+          "nearest": "ok",
+          "distances": {
+            "ok": 0.0076,
+            "ltr-base": 0.6713,
+            "no-bidi": 0.6884,
+            "reversed": 0.1468
+          },
+          "shot": "shots/fpdf2-shaping/hebrew.png",
+          "source": "pdf"
+        },
+        "wrapping": {
+          "verdict": "pass",
+          "variant": "ok",
+          "distance": 0.0031,
+          "label": "Correct: shaped and in Unicode Bidi order",
+          "advice": "",
+          "nearest": "ok",
+          "distances": {
+            "ok": 0.0031,
+            "ltr-base": 0.3113,
+            "unshaped": 1.0267,
+            "no-bidi": 0.6369,
+            "naive": 1.0611
+          },
+          "shot": "shots/fpdf2-shaping/wrapping.png",
+          "source": "pdf"
+        }
+      }
+    },
+    {
+      "id": "xhtml2pdf",
+      "library": "xhtml2pdf",
+      "package": "xhtml2pdf",
+      "ecosystem": "pypi",
+      "category": "pdf",
+      "mode": "default",
+      "adapter": "adapters/python/xhtml2pdf_adapter.py",
+      "version": "0.2.28",
+      "summary": "partial",
+      "passed": 7,
+      "judged": 8,
+      "cells": {
+        "connected": {
+          "verdict": "pass",
+          "variant": "ok",
+          "distance": 0.0132,
+          "label": "Correct: shaped and in Unicode Bidi order",
+          "advice": "",
+          "nearest": "ok",
+          "distances": {
+            "ok": 0.0132,
+            "unshaped": 0.7863,
+            "no-bidi": 0.6244,
+            "naive": 0.802
+          },
+          "shot": "shots/xhtml2pdf/connected.png",
+          "source": "pdf"
+        },
+        "lam-alef": {
+          "verdict": "pass",
+          "variant": "ok",
+          "distance": 0.009,
+          "label": "Correct: shaped and in Unicode Bidi order",
+          "advice": "",
+          "nearest": "ok",
+          "distances": {
+            "ok": 0.009,
+            "unshaped": 0.7747,
+            "no-bidi": 0.6567,
+            "naive": 0.7982
+          },
+          "shot": "shots/xhtml2pdf/lam-alef.png",
+          "source": "pdf"
+        },
+        "harakat": {
+          "verdict": "mismatch",
+          "variant": null,
+          "distance": null,
+          "label": "Differs from the correct rendering and from every known failure pattern; needs human review",
+          "advice": "",
+          "nearest": "ok",
+          "distances": {
+            "ok": 0.5432,
+            "unshaped": 0.593,
+            "no-bidi": 0.7311,
+            "naive": 0.6562
+          },
+          "shot": "shots/xhtml2pdf/harakat.png",
+          "source": "pdf"
+        },
+        "invoice-line": {
+          "verdict": "pass",
+          "variant": "ok",
+          "distance": 0.0107,
+          "label": "Correct: shaped and in Unicode Bidi order",
+          "advice": "",
+          "nearest": "ok",
+          "distances": {
+            "ok": 0.0107,
+            "ltr-base": 0.6843,
+            "unshaped": 0.5666,
+            "no-bidi": 0.7523,
+            "naive": 0.6699,
+            "reversed": 0.4437,
+            "unshaped-reversed": 0.6363
+          },
+          "shot": "shots/xhtml2pdf/invoice-line.png",
+          "source": "pdf"
+        },
+        "digits": {
+          "verdict": "pass",
+          "variant": "ok",
+          "distance": 0.0111,
+          "label": "Correct: shaped and in Unicode Bidi order",
+          "advice": "",
+          "nearest": "ok",
+          "distances": {
+            "ok": 0.0111,
+            "unshaped": 0.5528,
+            "no-bidi": 0.6557,
+            "naive": 0.7128,
+            "reversed": 0.2405,
+            "unshaped-reversed": 0.586
+          },
+          "shot": "shots/xhtml2pdf/digits.png",
+          "source": "pdf"
+        },
+        "persian": {
+          "verdict": "pass",
+          "variant": "ok",
+          "distance": 0.0097,
+          "label": "Correct: shaped and in Unicode Bidi order",
+          "advice": "",
+          "nearest": "ok",
+          "distances": {
+            "ok": 0.0097,
+            "unshaped": 0.8236,
+            "no-bidi": 0.671,
+            "naive": 0.8493
+          },
+          "shot": "shots/xhtml2pdf/persian.png",
+          "source": "pdf"
+        },
+        "hebrew": {
+          "verdict": "pass",
+          "variant": "ok",
+          "distance": 0.0114,
+          "label": "Correct: shaped and in Unicode Bidi order",
+          "advice": "",
+          "nearest": "ok",
+          "distances": {
+            "ok": 0.0114,
+            "ltr-base": 0.6679,
+            "no-bidi": 0.6889,
+            "reversed": 0.1499
+          },
+          "shot": "shots/xhtml2pdf/hebrew.png",
+          "source": "pdf"
+        },
+        "wrapping": {
+          "verdict": "pass",
+          "variant": "ok",
+          "distance": 0.0328,
+          "label": "Correct: shaped and in Unicode Bidi order",
+          "advice": "",
+          "nearest": "ok",
+          "distances": {
+            "ok": 0.0328,
+            "ltr-base": 0.334,
+            "unshaped": 1.0103,
+            "no-bidi": 0.6534,
+            "naive": 1.0487
+          },
+          "shot": "shots/xhtml2pdf/wrapping.png",
+          "source": "pdf"
+        }
+      }
+    },
+    {
+      "id": "pillow",
+      "library": "Pillow ImageDraw",
+      "package": "Pillow",
+      "ecosystem": "pypi",
+      "category": "og-image",
+      "mode": "default",
+      "adapter": "adapters/python/pillow_adapter.py",
+      "version": "12.0.0 (raqm layout)",
+      "summary": "pass",
+      "passed": 7,
+      "judged": 7,
+      "cells": {
+        "connected": {
+          "verdict": "pass",
+          "variant": "ok",
+          "distance": 0.0095,
+          "label": "Correct: shaped and in Unicode Bidi order",
+          "advice": "",
+          "nearest": "ok",
+          "distances": {
+            "ok": 0.0095,
+            "unshaped": 0.7934,
+            "no-bidi": 0.6314,
+            "naive": 0.8107
+          },
+          "shot": "shots/pillow/connected.png",
+          "source": "png"
+        },
+        "lam-alef": {
+          "verdict": "pass",
+          "variant": "ok",
+          "distance": 0.0027,
+          "label": "Correct: shaped and in Unicode Bidi order",
+          "advice": "",
+          "nearest": "ok",
+          "distances": {
+            "ok": 0.0027,
+            "unshaped": 0.7802,
+            "no-bidi": 0.6561,
+            "naive": 0.7979
+          },
+          "shot": "shots/pillow/lam-alef.png",
+          "source": "png"
+        },
+        "harakat": {
+          "verdict": "pass",
+          "variant": "ok",
+          "distance": 0.0025,
+          "label": "Correct: shaped and in Unicode Bidi order",
+          "advice": "",
+          "nearest": "ok",
+          "distances": {
+            "ok": 0.0025,
+            "unshaped": 0.7632,
+            "no-bidi": 0.6741,
+            "naive": 0.8078
+          },
+          "shot": "shots/pillow/harakat.png",
+          "source": "png"
+        },
+        "invoice-line": {
+          "verdict": "pass",
+          "variant": "ok",
+          "distance": 0.0026,
+          "label": "Correct: shaped and in Unicode Bidi order",
+          "advice": "",
+          "nearest": "ok",
+          "distances": {
+            "ok": 0.0026,
+            "ltr-base": 0.6868,
+            "unshaped": 0.5684,
+            "no-bidi": 0.7568,
+            "naive": 0.6692,
+            "reversed": 0.4547,
+            "unshaped-reversed": 0.6429
+          },
+          "shot": "shots/pillow/invoice-line.png",
+          "source": "png"
+        },
+        "digits": {
+          "verdict": "pass",
+          "variant": "ok",
+          "distance": 0.0023,
+          "label": "Correct: shaped and in Unicode Bidi order",
+          "advice": "",
+          "nearest": "ok",
+          "distances": {
+            "ok": 0.0023,
+            "unshaped": 0.5729,
+            "no-bidi": 0.6468,
+            "naive": 0.72,
+            "reversed": 0.2329,
+            "unshaped-reversed": 0.5995
+          },
+          "shot": "shots/pillow/digits.png",
+          "source": "png"
+        },
+        "persian": {
+          "verdict": "pass",
+          "variant": "ok",
+          "distance": 0.0016,
+          "label": "Correct: shaped and in Unicode Bidi order",
+          "advice": "",
+          "nearest": "ok",
+          "distances": {
+            "ok": 0.0016,
+            "unshaped": 0.816,
+            "no-bidi": 0.6688,
+            "naive": 0.8396
+          },
+          "shot": "shots/pillow/persian.png",
+          "source": "png"
+        },
+        "hebrew": {
+          "verdict": "pass",
+          "variant": "ok",
+          "distance": 0.0104,
+          "label": "Correct: shaped and in Unicode Bidi order",
+          "advice": "",
+          "nearest": "ok",
+          "distances": {
+            "ok": 0.0104,
+            "ltr-base": 0.671,
+            "no-bidi": 0.6905,
+            "reversed": 0.149
+          },
+          "shot": "shots/pillow/hebrew.png",
+          "source": "png"
+        },
+        "wrapping": {
+          "verdict": "n/a",
+          "reason": "ImageDraw has no line-wrapping API"
+        }
+      }
+    },
+    {
+      "id": "matplotlib",
+      "library": "matplotlib",
+      "package": "matplotlib",
+      "ecosystem": "pypi",
+      "category": "chart",
+      "mode": "default",
+      "adapter": "adapters/python/matplotlib_adapter.py",
+      "version": "3.10.7",
+      "summary": "fail",
+      "passed": 0,
+      "judged": 8,
+      "cells": {
+        "connected": {
+          "verdict": "fail",
+          "variant": "naive",
+          "distance": 0.0044,
+          "label": "Disconnected letters drawn left-to-right in typing order (no shaping, no bidi)",
+          "advice": "The library draws code points one by one: use a library with HarfBuzz shaping and bidi.",
+          "nearest": "naive",
+          "distances": {
+            "ok": 0.8058,
+            "unshaped": 0.6474,
+            "no-bidi": 0.7149,
+            "naive": 0.0044
+          },
+          "shot": "shots/matplotlib/connected.png",
+          "source": "png"
+        },
+        "lam-alef": {
+          "verdict": "fail",
+          "variant": "naive",
+          "distance": 0.0033,
+          "label": "Disconnected letters drawn left-to-right in typing order (no shaping, no bidi)",
+          "advice": "The library draws code points one by one: use a library with HarfBuzz shaping and bidi.",
+          "nearest": "naive",
+          "distances": {
+            "ok": 0.7985,
+            "unshaped": 0.6874,
+            "no-bidi": 0.7595,
+            "naive": 0.0033
+          },
+          "shot": "shots/matplotlib/lam-alef.png",
+          "source": "png"
+        },
+        "harakat": {
+          "verdict": "mismatch",
+          "variant": null,
+          "distance": null,
+          "label": "Differs from the correct rendering and from every known failure pattern; needs human review",
+          "advice": "",
+          "nearest": "naive",
+          "distances": {
+            "ok": 0.9786,
+            "unshaped": 0.8739,
+            "no-bidi": 0.9234,
+            "naive": 0.8323
+          },
+          "shot": "shots/matplotlib/harakat.png",
+          "source": "png"
+        },
+        "invoice-line": {
+          "verdict": "fail",
+          "variant": "naive",
+          "distance": 0.0049,
+          "label": "Disconnected letters drawn left-to-right in typing order (no shaping, no bidi)",
+          "advice": "The library draws code points one by one: use a library with HarfBuzz shaping and bidi.",
+          "nearest": "naive",
+          "distances": {
+            "ok": 0.6703,
+            "ltr-base": 0.648,
+            "unshaped": 0.6914,
+            "no-bidi": 0.6224,
+            "naive": 0.0049,
+            "reversed": 0.6348,
+            "unshaped-reversed": 0.6375
+          },
+          "shot": "shots/matplotlib/invoice-line.png",
+          "source": "png"
+        },
+        "digits": {
+          "verdict": "fail",
+          "variant": "naive",
+          "distance": 0.005,
+          "label": "Disconnected letters drawn left-to-right in typing order (no shaping, no bidi)",
+          "advice": "The library draws code points one by one: use a library with HarfBuzz shaping and bidi.",
+          "nearest": "naive",
+          "distances": {
+            "ok": 0.7229,
+            "unshaped": 0.6757,
+            "no-bidi": 0.6388,
+            "naive": 0.005,
+            "reversed": 0.7573,
+            "unshaped-reversed": 0.6838
+          },
+          "shot": "shots/matplotlib/digits.png",
+          "source": "png"
+        },
+        "persian": {
+          "verdict": "fail",
+          "variant": "naive",
+          "distance": 0.005,
+          "label": "Disconnected letters drawn left-to-right in typing order (no shaping, no bidi)",
+          "advice": "The library draws code points one by one: use a library with HarfBuzz shaping and bidi.",
+          "nearest": "naive",
+          "distances": {
+            "ok": 0.8427,
+            "unshaped": 0.6524,
+            "no-bidi": 0.6612,
+            "naive": 0.005
+          },
+          "shot": "shots/matplotlib/persian.png",
+          "source": "png"
+        },
+        "hebrew": {
+          "verdict": "fail",
+          "variant": "no-bidi",
+          "distance": 0.0099,
+          "label": "Letters joined but drawn left-to-right in typing order (no bidi reordering)",
+          "advice": "Apply the Unicode Bidi Algorithm (e.g. bidi-js / python-bidi get_display) or set RTL direction.",
+          "nearest": "no-bidi",
+          "distances": {
+            "ok": 0.6838,
+            "ltr-base": 0.5443,
+            "no-bidi": 0.0099,
+            "reversed": 0.6811
+          },
+          "shot": "shots/matplotlib/hebrew.png",
+          "source": "png"
+        },
+        "wrapping": {
+          "verdict": "mismatch",
+          "variant": null,
+          "distance": null,
+          "label": "Differs from the correct rendering and from every known failure pattern; needs human review",
+          "advice": "",
+          "nearest": "naive",
+          "distances": {
+            "ok": 1.0309,
+            "ltr-base": 1.0822,
+            "unshaped": 0.5387,
+            "no-bidi": 1.064,
+            "naive": 0.4316
+          },
+          "shot": "shots/matplotlib/wrapping.png",
+          "source": "png"
+        }
+      }
+    }
+  ]
+}

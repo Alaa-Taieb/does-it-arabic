@@ -12,7 +12,7 @@
       ],
       "dependsOn": [],
       "priority": "high",
-      "status": "in_progress",
+      "status": "verification_pending",
       "blockers": [],
       "planned": true,
       "acceptance": [
@@ -26,23 +26,45 @@
         }
       ],
       "requiresHumanApproval": false,
-      "commits": [],
-      "files": [],
-      "evidence": [],
-      "decisionIds": [],
-      "provenance": "stated",
-      "createdAt": "2026-11-02T15:11:54.270Z",
-      "createdBy": "claude-code",
-      "updatedAt": "2026-11-02T15:11:57.268Z",
+      "activeHarness": "claude-code",
+      "workspace": "does-it-arabic-rtl-test-matrix-for-code-and-codi",
+      "startedAt": "2026-11-02T15:11:57.268Z",
       "provisional": {
         "startedAt": "2026-11-02T15:11:57.268Z",
         "by": "claude-code",
         "visionSha": "49a44a16ebc223fc34dacb12b6c4be09c11962787be46e81d86c9cc04dd05a10",
         "requirementsSha": "4e42aada3521079b6a3b4e0ffdf095a7ed44841629a9146016b0d43ee245746e"
       },
-      "activeHarness": "claude-code",
-      "workspace": "does-it-arabic-rtl-test-matrix-for-code-and-codi",
-      "startedAt": "2026-11-02T15:11:57.268Z"
+      "commits": [
+        "4f3736b"
+      ],
+      "files": [],
+      "implementation": {
+        "reportedAt": "2026-11-02T15:14:31.357Z",
+        "by": "claude-code",
+        "summary": "Fixtures package (JSON + JS/Python loaders), Chromium reference and failure-variant renderer, renderer-independent comparison and classifier with 37 pytest tests using real library outputs",
+        "revision": "4f3736bb983e9da2fe26247476800d82307ca820+dirty",
+        "tree": "ea0fc1fde7dd70b538448e10781816b95938ff94"
+      },
+      "evidence": [
+        {
+          "id": "E1",
+          "kind": "automated",
+          "method": "unit-tests",
+          "result": "pass",
+          "revision": "4f3736bb983e9da2fe26247476800d82307ca820+dirty",
+          "tree": "ea0fc1fde7dd70b538448e10781816b95938ff94",
+          "at": "2026-11-02T15:14:35.596Z",
+          "by": "claude-code",
+          "detail": "$ python -m pytest -q\nshell: bash\nexit 0\n.....................................                                    [100%]\r\n37 passed in 2.37s",
+          "criteria": []
+        }
+      ],
+      "decisionIds": [],
+      "provenance": "stated",
+      "createdAt": "2026-11-02T15:11:54.270Z",
+      "createdBy": "claude-code",
+      "updatedAt": "2026-11-02T15:14:35.596Z"
     },
     {
       "id": "NS-007",
@@ -57,7 +79,7 @@
         "NS-006"
       ],
       "priority": "high",
-      "status": "planned",
+      "status": "in_progress",
       "blockers": [],
       "planned": true,
       "acceptance": [
@@ -78,7 +100,17 @@
       "provenance": "stated",
       "createdAt": "2026-11-02T15:11:54.270Z",
       "createdBy": "claude-code",
-      "updatedAt": "2026-11-02T15:11:54.270Z"
+      "updatedAt": "2026-11-02T15:14:35.948Z",
+      "provisional": {
+        "startedAt": "2026-11-02T15:14:35.948Z",
+        "by": "claude-code",
+        "visionSha": "49a44a16ebc223fc34dacb12b6c4be09c11962787be46e81d86c9cc04dd05a10",
+        "requirementsSha": "1f58370086d199f7da99e3a21ce7294495e92d208b8f9fb4e94a8d6941f9eabd"
+      },
+      "activeHarness": "claude-code",
+      "branch": "master",
+      "workspace": "does-it-arabic-rtl-test-matrix-for-code-and-codi",
+      "startedAt": "2026-11-02T15:14:35.948Z"
     },
     {
       "id": "NS-008",
