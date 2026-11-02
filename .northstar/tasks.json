@@ -216,7 +216,7 @@
         "NS-008"
       ],
       "priority": "medium",
-      "status": "in_progress",
+      "status": "verification_pending",
       "blockers": [],
       "planned": true,
       "acceptance": [
@@ -230,24 +230,46 @@
         }
       ],
       "requiresHumanApproval": false,
-      "commits": [],
-      "files": [],
-      "evidence": [],
-      "decisionIds": [],
-      "provenance": "stated",
-      "createdAt": "2026-11-02T15:11:54.270Z",
-      "createdBy": "claude-code",
-      "updatedAt": "2026-11-02T15:26:30.304Z",
+      "activeHarness": "claude-code",
+      "branch": "master",
+      "workspace": "does-it-arabic-rtl-test-matrix-for-code-and-codi",
+      "startedAt": "2026-11-02T15:26:30.304Z",
       "provisional": {
         "startedAt": "2026-11-02T15:26:30.304Z",
         "by": "claude-code",
         "visionSha": "49a44a16ebc223fc34dacb12b6c4be09c11962787be46e81d86c9cc04dd05a10",
         "requirementsSha": "adc7efefb06cbd887369124453166d1fe11917e73afa71761759e6b9cc1e81be"
       },
-      "activeHarness": "claude-code",
-      "branch": "master",
-      "workspace": "does-it-arabic-rtl-test-matrix-for-code-and-codi",
-      "startedAt": "2026-11-02T15:26:30.304Z"
+      "commits": [
+        "71e4df0"
+      ],
+      "files": [],
+      "implementation": {
+        "reportedAt": "2026-11-02T15:29:29.684Z",
+        "by": "claude-code",
+        "summary": "check CLI (file, spec, endpoint; --font renders references in the user's font; JSON and Markdown summary), composite action.yml + action/run.py; 79 tests incl. live local endpoint",
+        "revision": "71e4df0f6987f5d0455535acddac9c37665ba2bc",
+        "tree": "8659341e553770cc597a88ce8de2ddc8dfaf3ae8"
+      },
+      "evidence": [
+        {
+          "id": "E1",
+          "kind": "automated",
+          "method": "unit-tests",
+          "result": "pass",
+          "revision": "71e4df0f6987f5d0455535acddac9c37665ba2bc",
+          "tree": "8659341e553770cc597a88ce8de2ddc8dfaf3ae8",
+          "at": "2026-11-02T15:29:59.796Z",
+          "by": "claude-code",
+          "detail": "$ python -m pytest -q\nshell: bash\nexit 0\n........................................................................ [ 91%]\r\n.......                                                                  [100%]\r\n79 passed in 28.63s",
+          "criteria": []
+        }
+      ],
+      "decisionIds": [],
+      "provenance": "stated",
+      "createdAt": "2026-11-02T15:11:54.270Z",
+      "createdBy": "claude-code",
+      "updatedAt": "2026-11-02T15:29:59.796Z"
     },
     {
       "id": "NS-010",
@@ -262,7 +284,7 @@
         "NS-009"
       ],
       "priority": "medium",
-      "status": "planned",
+      "status": "in_progress",
       "blockers": [],
       "planned": true,
       "acceptance": [
@@ -283,7 +305,17 @@
       "provenance": "stated",
       "createdAt": "2026-11-02T15:11:54.270Z",
       "createdBy": "claude-code",
-      "updatedAt": "2026-11-02T15:11:54.270Z"
+      "updatedAt": "2026-11-02T15:30:00.189Z",
+      "provisional": {
+        "startedAt": "2026-11-02T15:30:00.189Z",
+        "by": "claude-code",
+        "visionSha": "49a44a16ebc223fc34dacb12b6c4be09c11962787be46e81d86c9cc04dd05a10",
+        "requirementsSha": "f750d0f2f7772e9712272e53385d019a5684e4067bf8acb62fd8e8b3d79317fb"
+      },
+      "activeHarness": "claude-code",
+      "branch": "master",
+      "workspace": "does-it-arabic-rtl-test-matrix-for-code-and-codi",
+      "startedAt": "2026-11-02T15:30:00.189Z"
     }
   ]
 }

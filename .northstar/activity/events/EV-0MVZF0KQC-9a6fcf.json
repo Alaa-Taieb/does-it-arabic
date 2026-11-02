@@ -1,0 +1,13 @@
+{
+  "id": "EV-0MVZF0KQC-9a6fcf",
+  "type": "verification.recorded",
+  "at": "2026-11-02T15:29:59.796Z",
+  "actor": "claude-code",
+  "entityIds": [
+    "NS-009"
+  ],
+  "summary": "automated check \"unit-tests\" pass for NS-009",
+  "data": {
+    "evidence": "E1"
+  }
+}

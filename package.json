@@ -26,5 +26,8 @@
     "build": "python -m doesitarabic build",
     "matrix": "python -m doesitarabic matrix",
     "test": "python -m pytest -q"
+  },
+  "engines": {
+    "node": ">=20"
   }
 }

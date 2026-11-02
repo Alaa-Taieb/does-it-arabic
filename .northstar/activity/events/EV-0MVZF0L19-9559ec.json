@@ -1,0 +1,14 @@
+{
+  "id": "EV-0MVZF0L19-9559ec",
+  "type": "task.started",
+  "at": "2026-11-02T15:30:00.189Z",
+  "actor": "claude-code",
+  "entityIds": [
+    "NS-010",
+    "MS-010"
+  ],
+  "summary": "claude-code started NS-010 provisionally (vision not yet approved): README and DECISIONS",
+  "data": {
+    "branch": "master"
+  }
+}

@@ -1,0 +1,8 @@
+# Libraries rendered by the Python adapters (versions used for the committed results)
+reportlab==5.1.0
+fpdf2==2.9.0
+uharfbuzz==0.57.0
+arabic-reshaper==3.1.0
+python-bidi==0.6.12
+matplotlib==3.10.7
+xhtml2pdf==0.2.28
