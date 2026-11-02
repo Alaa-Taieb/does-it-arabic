@@ -1,0 +1,10 @@
+{
+  "id": "EV-0MVZFU40J-055677",
+  "type": "milestone.criterion",
+  "at": "2026-11-02T15:52:57.811Z",
+  "actor": "claude-code",
+  "entityIds": [
+    "MS-006"
+  ],
+  "summary": "MS-006 exit criterion X1 met: pytest passes"
+}

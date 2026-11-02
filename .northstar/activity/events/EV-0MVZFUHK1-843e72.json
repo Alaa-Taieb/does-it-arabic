@@ -1,0 +1,10 @@
+{
+  "id": "EV-0MVZFUHK1-843e72",
+  "type": "milestone.criterion",
+  "at": "2026-11-02T15:53:15.361Z",
+  "actor": "claude-code",
+  "entityIds": [
+    "MS-008"
+  ],
+  "summary": "MS-008 exit criterion X1 met: npm start serves the grid"
+}

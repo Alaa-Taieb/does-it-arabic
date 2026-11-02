@@ -1,0 +1,13 @@
+{
+  "id": "EV-0MVZFTUR5-368acf",
+  "type": "verification.recorded",
+  "at": "2026-11-02T15:52:45.809Z",
+  "actor": "claude-code",
+  "entityIds": [
+    "NS-011"
+  ],
+  "summary": "automated check \"registry-check\" pass for NS-011",
+  "data": {
+    "evidence": "E1"
+  }
+}

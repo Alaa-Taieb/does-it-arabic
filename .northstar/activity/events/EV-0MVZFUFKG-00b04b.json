@@ -1,0 +1,10 @@
+{
+  "id": "EV-0MVZFUFKG-00b04b",
+  "type": "milestone.criterion",
+  "at": "2026-11-02T15:53:12.784Z",
+  "actor": "claude-code",
+  "entityIds": [
+    "MS-007"
+  ],
+  "summary": "MS-007 exit criterion X1 met: npm run matrix produces results/matrix.json"
+}

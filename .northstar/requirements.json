@@ -6,7 +6,7 @@
       "description": "8 fixtures: connected, lam-alef, harakat, mixed invoice line, digits, Persian, Hebrew, wrapping.",
       "kind": "functional",
       "priority": "must",
-      "status": "proposed",
+      "status": "approved",
       "acceptance": [
         "fixtures.json has 8 fixtures with text, direction and meaning",
         "JS and Python loaders read it"
@@ -21,7 +21,7 @@
       "description": "Classify each library output as pass/partial/fail/mismatch with a diagnosis.",
       "kind": "functional",
       "priority": "must",
-      "status": "proposed",
+      "status": "approved",
       "acceptance": [
         "Reference and failure variants rendered by Chromium",
         "Classifier unit tests pass",
@@ -37,7 +37,7 @@
       "description": "About 15 library configurations rendered and judged into matrix.json with screenshots.",
       "kind": "functional",
       "priority": "must",
-      "status": "proposed",
+      "status": "approved",
       "acceptance": [
         "npm run matrix produces results/matrix.json and screenshots",
         "Errors and unsupported fixtures are recorded, not hidden"
@@ -52,7 +52,7 @@
       "description": "Grid page, per-library pages, matrix.json, llms.txt, skill file.",
       "kind": "functional",
       "priority": "must",
-      "status": "proposed",
+      "status": "approved",
       "acceptance": [
         "npm start builds and serves the site",
         "Generated files are derived only from matrix.json"
@@ -67,7 +67,7 @@
       "description": "Judge a user's own PDF/PNG for a fixture; Action wraps the command.",
       "kind": "functional",
       "priority": "should",
-      "status": "proposed",
+      "status": "approved",
       "acceptance": [
         "check exits non-zero on a failing render",
         "action.yml runs the check command"
@@ -82,7 +82,7 @@
       "description": "Verdicts are machine-judged and labelled so; no invented results.",
       "kind": "constraint",
       "priority": "must",
-      "status": "proposed",
+      "status": "approved",
       "acceptance": [
         "Site labels verdicts as automatic until reviewed"
       ],

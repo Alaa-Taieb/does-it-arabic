@@ -1,0 +1,14 @@
+{
+  "id": "EV-0MVZFTSR5-9a1f1b",
+  "type": "task.implemented",
+  "at": "2026-11-02T15:52:43.217Z",
+  "actor": "claude-code",
+  "entityIds": [
+    "NS-011",
+    "MS-010"
+  ],
+  "summary": "claude-code reported NS-011 implemented (NOT verified): Owner asked to publish. Brief kept private (stripped from history before first push, owner's choice). Repo github.com/Alaa-Taieb/does-it-arabic public with tag v0.1.0; arabic-fixtures 0.1.0 on npm and PyPI, both installed from the registries in clean environments. No GitHub Pages (not available on the account yet).",
+  "data": {
+    "revision": "a2ea83c14c149fd28672bc0f99c0dbcefa9b256e"
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "id": "EV-0MVZFTJ8T-ba9950",
+  "type": "task.verified",
+  "at": "2026-11-02T15:52:30.893Z",
+  "actor": "human",
+  "entityIds": [
+    "NS-009",
+    "MS-009"
+  ],
+  "summary": "Task NS-009 verified on vision approval (provisional work, existing evidence): check CLI and GitHub Action"
+}

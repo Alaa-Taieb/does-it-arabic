@@ -1,0 +1,11 @@
+{
+  "id": "EV-0MVZFTUR5-75aacb",
+  "type": "task.verified",
+  "at": "2026-11-02T15:52:45.809Z",
+  "actor": "claude-code",
+  "entityIds": [
+    "NS-011",
+    "MS-010"
+  ],
+  "summary": "Task NS-011 verified: Publish: public GitHub repo, arabic-fixtures 0.1.0 on npm and PyPI"
+}

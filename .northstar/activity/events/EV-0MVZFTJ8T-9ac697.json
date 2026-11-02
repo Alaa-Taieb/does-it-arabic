@@ -1,0 +1,11 @@
+{
+  "id": "EV-0MVZFTJ8T-9ac697",
+  "type": "task.verified",
+  "at": "2026-11-02T15:52:30.893Z",
+  "actor": "human",
+  "entityIds": [
+    "NS-008",
+    "MS-008"
+  ],
+  "summary": "Task NS-008 verified on vision approval (provisional work, existing evidence): Static site, llms.txt and skill file"
+}

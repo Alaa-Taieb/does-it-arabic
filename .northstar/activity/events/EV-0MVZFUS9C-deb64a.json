@@ -1,0 +1,10 @@
+{
+  "id": "EV-0MVZFUS9C-deb64a",
+  "type": "milestone.criterion",
+  "at": "2026-11-02T15:53:29.232Z",
+  "actor": "claude-code",
+  "entityIds": [
+    "MS-009"
+  ],
+  "summary": "MS-009 exit criterion X1 met: check CLI tested"
+}

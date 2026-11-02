@@ -1,0 +1,11 @@
+{
+  "id": "EV-0MVZFTJ8T-422343",
+  "type": "task.verified",
+  "at": "2026-11-02T15:52:30.893Z",
+  "actor": "human",
+  "entityIds": [
+    "NS-007",
+    "MS-007"
+  ],
+  "summary": "Task NS-007 verified on vision approval (provisional work, existing evidence): Library adapters and matrix runner"
+}

@@ -1,8 +1,8 @@
 {
-  "generatedAt": "2026-11-02T15:34:11.467Z",
+  "generatedAt": "2026-11-02T15:54:05.173Z",
   "generatedBy": "claude-code",
-  "stateFingerprint": "7bd2ab10b6b106c0f13cacbbf4e65bc92ce969214e199ecfbe31433c3ea548d5",
-  "headline": "Working MVP: 17 real library configurations rendered and judged; 10 break the Arabic invoice line. Awaiting your approval of the vision.",
+  "stateFingerprint": "3446c25e375b71a2bef5b8696d2a84531ce8d6b6be0c7afcc5a1cdb6468f07ef",
+  "headline": "Published v0.1.0: 17 real library configurations judged (10 break the Arabic invoice line); repo on GitHub, arabic-fixtures on npm and PyPI. Vision approved, all 6 tasks verified.",
   "overview": "Does It Arabic? renders the same Arabic, Persian and Hebrew invoice texts with many PDF, image and chart libraries, screenshots each result and judges it automatically against a correct Chromium rendering. The results become a website, files coding agents can read, a fixtures package and a check command / GitHub Action for your own PDFs.",
   "pillars": [
     {
@@ -25,23 +25,23 @@
   "sections": [
     {
       "title": "What works today",
-      "body": "Matrix of 17 configurations, static site via npm start, llms.txt and SKILL.md, fixtures package, check command (files, endpoint, custom font) and action.yml. 79 automated tests pass. All tasks are recorded as provisional until the vision is approved."
+      "body": "Verified: matrix of 17 configurations, static site via npm start, llms.txt and SKILL.md, check command (files, endpoint, custom font) and action.yml, 79 tests. Public at github.com/Alaa-Taieb/does-it-arabic; arabic-fixtures 0.1.0 on npm and PyPI."
     },
     {
       "title": "Reported but not yet verified",
-      "body": "All five tasks: their checks pass, but Northstar keeps them provisional until you approve the vision."
+      "body": "Nothing."
     },
     {
       "title": "Challenges",
-      "body": "No native-speaker review yet; Persian and Hebrew fixture texts need checking. The Action has never run on GitHub. Only tested on Windows."
+      "body": "No native-speaker review yet; Persian and Hebrew fixture texts need checking. The Action has never run on GitHub (Actions disabled on the account). The site is not hosted (GitHub Pages unavailable for now). Only tested on Windows."
     },
     {
       "title": "Recent changes",
-      "body": "Built milestones 1-5 on 2026-11-02, one commit each."
+      "body": "2026-11-02: built milestones 1-5, published repo and packages, vision approved."
     },
     {
       "title": "Next up",
-      "body": "Your approval of the vision; a native-speaker review of the cells marked mismatch; the coding-agent benchmark."
+      "body": "Native-speaker review of mismatch cells; the coding-agent benchmark; hosting the site once Pages works."
     }
   ]
 }

@@ -12,7 +12,7 @@
       ],
       "dependsOn": [],
       "priority": "high",
-      "status": "verification_pending",
+      "status": "verified",
       "blockers": [],
       "planned": true,
       "acceptance": [
@@ -33,7 +33,9 @@
         "startedAt": "2026-11-02T15:11:57.268Z",
         "by": "claude-code",
         "visionSha": "49a44a16ebc223fc34dacb12b6c4be09c11962787be46e81d86c9cc04dd05a10",
-        "requirementsSha": "4e42aada3521079b6a3b4e0ffdf095a7ed44841629a9146016b0d43ee245746e"
+        "requirementsSha": "4e42aada3521079b6a3b4e0ffdf095a7ed44841629a9146016b0d43ee245746e",
+        "resolvedAt": "2026-11-02T15:52:30.893Z",
+        "outcome": "verified"
       },
       "commits": [
         "4f3736b"
@@ -64,7 +66,7 @@
       "provenance": "stated",
       "createdAt": "2026-11-02T15:11:54.270Z",
       "createdBy": "claude-code",
-      "updatedAt": "2026-11-02T15:14:35.596Z"
+      "updatedAt": "2026-11-02T15:52:30.893Z"
     },
     {
       "id": "NS-007",
@@ -79,7 +81,7 @@
         "NS-006"
       ],
       "priority": "high",
-      "status": "verification_pending",
+      "status": "verified",
       "blockers": [],
       "planned": true,
       "acceptance": [
@@ -101,7 +103,9 @@
         "startedAt": "2026-11-02T15:14:35.948Z",
         "by": "claude-code",
         "visionSha": "49a44a16ebc223fc34dacb12b6c4be09c11962787be46e81d86c9cc04dd05a10",
-        "requirementsSha": "1f58370086d199f7da99e3a21ce7294495e92d208b8f9fb4e94a8d6941f9eabd"
+        "requirementsSha": "1f58370086d199f7da99e3a21ce7294495e92d208b8f9fb4e94a8d6941f9eabd",
+        "resolvedAt": "2026-11-02T15:52:30.893Z",
+        "outcome": "verified"
       },
       "commits": [
         "da56c67"
@@ -132,7 +136,7 @@
       "provenance": "stated",
       "createdAt": "2026-11-02T15:11:54.270Z",
       "createdBy": "claude-code",
-      "updatedAt": "2026-11-02T15:22:19.617Z"
+      "updatedAt": "2026-11-02T15:52:30.893Z"
     },
     {
       "id": "NS-008",
@@ -148,7 +152,7 @@
         "NS-007"
       ],
       "priority": "high",
-      "status": "verification_pending",
+      "status": "verified",
       "blockers": [],
       "planned": true,
       "acceptance": [
@@ -170,7 +174,9 @@
         "startedAt": "2026-11-02T15:22:19.954Z",
         "by": "claude-code",
         "visionSha": "49a44a16ebc223fc34dacb12b6c4be09c11962787be46e81d86c9cc04dd05a10",
-        "requirementsSha": "6812659224febcca9abcfaf3c29a115fb70e3ce176b91863118cf955edf94dc0"
+        "requirementsSha": "6812659224febcca9abcfaf3c29a115fb70e3ce176b91863118cf955edf94dc0",
+        "resolvedAt": "2026-11-02T15:52:30.893Z",
+        "outcome": "verified"
       },
       "commits": [
         "db87d50"
@@ -201,7 +207,7 @@
       "provenance": "stated",
       "createdAt": "2026-11-02T15:11:54.270Z",
       "createdBy": "claude-code",
-      "updatedAt": "2026-11-02T15:26:29.965Z"
+      "updatedAt": "2026-11-02T15:52:30.893Z"
     },
     {
       "id": "NS-009",
@@ -216,7 +222,7 @@
         "NS-008"
       ],
       "priority": "medium",
-      "status": "verification_pending",
+      "status": "verified",
       "blockers": [],
       "planned": true,
       "acceptance": [
@@ -238,7 +244,9 @@
         "startedAt": "2026-11-02T15:26:30.304Z",
         "by": "claude-code",
         "visionSha": "49a44a16ebc223fc34dacb12b6c4be09c11962787be46e81d86c9cc04dd05a10",
-        "requirementsSha": "adc7efefb06cbd887369124453166d1fe11917e73afa71761759e6b9cc1e81be"
+        "requirementsSha": "adc7efefb06cbd887369124453166d1fe11917e73afa71761759e6b9cc1e81be",
+        "resolvedAt": "2026-11-02T15:52:30.893Z",
+        "outcome": "verified"
       },
       "commits": [
         "71e4df0"
@@ -269,7 +277,7 @@
       "provenance": "stated",
       "createdAt": "2026-11-02T15:11:54.270Z",
       "createdBy": "claude-code",
-      "updatedAt": "2026-11-02T15:29:59.796Z"
+      "updatedAt": "2026-11-02T15:52:30.893Z"
     },
     {
       "id": "NS-010",
@@ -284,7 +292,7 @@
         "NS-009"
       ],
       "priority": "medium",
-      "status": "verification_pending",
+      "status": "verified",
       "blockers": [],
       "planned": true,
       "acceptance": [
@@ -306,7 +314,9 @@
         "startedAt": "2026-11-02T15:30:00.189Z",
         "by": "claude-code",
         "visionSha": "49a44a16ebc223fc34dacb12b6c4be09c11962787be46e81d86c9cc04dd05a10",
-        "requirementsSha": "f750d0f2f7772e9712272e53385d019a5684e4067bf8acb62fd8e8b3d79317fb"
+        "requirementsSha": "f750d0f2f7772e9712272e53385d019a5684e4067bf8acb62fd8e8b3d79317fb",
+        "resolvedAt": "2026-11-02T15:52:30.893Z",
+        "outcome": "verified"
       },
       "commits": [
         "0b669de"
@@ -340,7 +350,7 @@
       "provenance": "stated",
       "createdAt": "2026-11-02T15:11:54.270Z",
       "createdBy": "claude-code",
-      "updatedAt": "2026-11-02T15:33:56.177Z"
+      "updatedAt": "2026-11-02T15:52:30.893Z"
     },
     {
       "id": "NS-011",
@@ -350,20 +360,49 @@
       "requirementIds": [],
       "dependsOn": [],
       "priority": "medium",
-      "status": "planned",
+      "status": "verified",
       "blockers": [],
       "planned": false,
       "classification": "minor",
       "acceptance": [],
       "requiresHumanApproval": false,
-      "commits": [],
-      "files": [],
-      "evidence": [],
+      "activeHarness": "claude-code",
+      "branch": "main",
+      "workspace": "does-it-arabic-rtl-test-matrix-for-code-and-codi",
+      "startedAt": "2026-11-02T15:52:42.733Z",
+      "commits": [
+        "a2ea83c"
+      ],
+      "files": [
+        "packages/arabic-fixtures/pyproject.toml",
+        "packages/arabic-fixtures/package.json"
+      ],
+      "implementation": {
+        "reportedAt": "2026-11-02T15:52:43.217Z",
+        "by": "claude-code",
+        "summary": "Owner asked to publish. Brief kept private (stripped from history before first push, owner's choice). Repo github.com/Alaa-Taieb/does-it-arabic public with tag v0.1.0; arabic-fixtures 0.1.0 on npm and PyPI, both installed from the registries in clean environments. No GitHub Pages (not available on the account yet).",
+        "revision": "a2ea83c14c149fd28672bc0f99c0dbcefa9b256e",
+        "tree": "39ba2bfc10b568d5f43c34729a64f7928b024861"
+      },
+      "evidence": [
+        {
+          "id": "E1",
+          "kind": "automated",
+          "method": "registry-check",
+          "result": "pass",
+          "revision": "a2ea83c14c149fd28672bc0f99c0dbcefa9b256e",
+          "tree": "39ba2bfc10b568d5f43c34729a64f7928b024861",
+          "at": "2026-11-02T15:52:45.809Z",
+          "by": "claude-code",
+          "detail": "$ npm view arabic-fixtures@0.1.0 version && curl -sf https://pypi.org/pypi/arabic-fixtures/0.1.0/json -o /dev/null && gh repo view Alaa-Taieb/does-it-arabic --json visibility --jq .visibility | grep -q PUBLIC\nshell: bash\nexit 0\n0.1.0",
+          "criteria": []
+        }
+      ],
       "decisionIds": [],
       "provenance": "stated",
       "createdAt": "2026-11-02T15:48:24.762Z",
       "createdBy": "claude-code",
-      "updatedAt": "2026-11-02T15:48:24.762Z"
+      "updatedAt": "2026-11-02T15:52:45.809Z"
     }
   ]
 }

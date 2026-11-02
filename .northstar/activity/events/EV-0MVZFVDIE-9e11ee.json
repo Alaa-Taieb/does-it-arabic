@@ -1,0 +1,10 @@
+{
+  "id": "EV-0MVZFVDIE-9e11ee",
+  "type": "milestone.criterion",
+  "at": "2026-11-02T15:53:56.774Z",
+  "actor": "claude-code",
+  "entityIds": [
+    "MS-010"
+  ],
+  "summary": "MS-010 exit criterion X1 met: All tests pass on the final snapshot"
+}
