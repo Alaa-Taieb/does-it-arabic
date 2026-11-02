@@ -1,0 +1,47 @@
+{
+  "generatedAt": "2026-11-02T15:33:17.182Z",
+  "generatedBy": "claude-code",
+  "stateFingerprint": "925fec0137bb2a223632992deb7363581fae09daf6508b5edcd38d10befda793",
+  "headline": "Working MVP: 17 real library configurations rendered and judged; 10 break the Arabic invoice line. Awaiting your approval of the vision.",
+  "overview": "Does It Arabic? renders the same Arabic, Persian and Hebrew invoice texts with many PDF, image and chart libraries, screenshots each result and judges it automatically against a correct Chromium rendering. The results become a website, files coding agents can read, a fixtures package and a check command / GitHub Action for your own PDFs.",
+  "pillars": [
+    {
+      "title": "Real screenshots",
+      "body": "Every cell is the actual output of the library, with the exact code shown."
+    },
+    {
+      "title": "Honest automatic verdicts",
+      "body": "Matched against the correct render and known bugs; anything unknown is flagged for human review."
+    },
+    {
+      "title": "Agent-first",
+      "body": "matrix.json, llms.txt and a skill file tell coding agents which libraries work."
+    },
+    {
+      "title": "Check your own output",
+      "body": "A command and GitHub Action judge your PDFs or your rendering endpoint."
+    }
+  ],
+  "sections": [
+    {
+      "title": "What works today",
+      "body": "Matrix of 17 configurations, static site via npm start, llms.txt and SKILL.md, fixtures package, check command (files, endpoint, custom font) and action.yml. 79 automated tests pass. All tasks are recorded as provisional until the vision is approved."
+    },
+    {
+      "title": "Reported but not yet verified",
+      "body": "All five tasks: their checks pass, but Northstar keeps them provisional until you approve the vision."
+    },
+    {
+      "title": "Challenges",
+      "body": "No native-speaker review yet; Persian and Hebrew fixture texts need checking. The Action has never run on GitHub. Only tested on Windows."
+    },
+    {
+      "title": "Recent changes",
+      "body": "Built milestones 1-5 on 2026-11-02, one commit each."
+    },
+    {
+      "title": "Next up",
+      "body": "Your approval of the vision; a native-speaker review of the cells marked mismatch; the coding-agent benchmark."
+    }
+  ]
+}

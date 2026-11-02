@@ -1,0 +1,11 @@
+{
+  "id": "EV-0MVZF4TAG-825410",
+  "type": "handoff.created",
+  "at": "2026-11-02T15:33:17.512Z",
+  "actor": "claude-code",
+  "entityIds": [
+    "HO-0MVZF4TAG-d2ce1c",
+    "NS-010"
+  ],
+  "summary": "claude-code recorded a handoff: MVP built in 5 milestones (commits 4f3736b..HEAD). All tasks complete with passing pytest evidence but provisional: vision not yet approved by the user. Next: user approval, native-speaker review of mismatch cells, agent benchmark."
+}

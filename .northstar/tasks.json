@@ -298,6 +298,16 @@
         }
       ],
       "requiresHumanApproval": false,
+      "activeHarness": "claude-code",
+      "branch": "master",
+      "workspace": "does-it-arabic-rtl-test-matrix-for-code-and-codi",
+      "startedAt": "2026-11-02T15:30:00.189Z",
+      "provisional": {
+        "startedAt": "2026-11-02T15:30:00.189Z",
+        "by": "claude-code",
+        "visionSha": "49a44a16ebc223fc34dacb12b6c4be09c11962787be46e81d86c9cc04dd05a10",
+        "requirementsSha": "f750d0f2f7772e9712272e53385d019a5684e4067bf8acb62fd8e8b3d79317fb"
+      },
       "commits": [],
       "files": [],
       "evidence": [],
@@ -305,17 +315,7 @@
       "provenance": "stated",
       "createdAt": "2026-11-02T15:11:54.270Z",
       "createdBy": "claude-code",
-      "updatedAt": "2026-11-02T15:30:00.189Z",
-      "provisional": {
-        "startedAt": "2026-11-02T15:30:00.189Z",
-        "by": "claude-code",
-        "visionSha": "49a44a16ebc223fc34dacb12b6c4be09c11962787be46e81d86c9cc04dd05a10",
-        "requirementsSha": "f750d0f2f7772e9712272e53385d019a5684e4067bf8acb62fd8e8b3d79317fb"
-      },
-      "activeHarness": "claude-code",
-      "branch": "master",
-      "workspace": "does-it-arabic-rtl-test-matrix-for-code-and-codi",
-      "startedAt": "2026-11-02T15:30:00.189Z"
+      "updatedAt": "2026-11-02T15:30:00.189Z"
     }
   ]
 }
