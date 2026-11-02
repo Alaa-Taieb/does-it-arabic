@@ -22,7 +22,9 @@
     "satori": "^0.63.2"
   },
   "scripts": {
-    "test": "python -m pytest -q",
-    "matrix": "python -m doesitarabic matrix"
+    "start": "python -m doesitarabic serve",
+    "build": "python -m doesitarabic build",
+    "matrix": "python -m doesitarabic matrix",
+    "test": "python -m pytest -q"
   }
 }

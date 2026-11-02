@@ -1,0 +1,14 @@
+{
+  "id": "EV-0MVZEQPWY-4189cc",
+  "type": "task.started",
+  "at": "2026-11-02T15:22:19.954Z",
+  "actor": "claude-code",
+  "entityIds": [
+    "NS-008",
+    "MS-008"
+  ],
+  "summary": "claude-code started NS-008 provisionally (vision not yet approved): Static site, llms.txt and skill file",
+  "data": {
+    "branch": "master"
+  }
+}

@@ -39,6 +39,33 @@ def cmd_matrix(args) -> int:
     return 0
 
 
+def cmd_build(args) -> int:
+    from .site import build_site
+
+    info = build_site()
+    print(f"built {info['pages']} pages into {info['out']}")
+    return 0
+
+
+def cmd_serve(args) -> int:
+    import functools
+    import http.server
+
+    from .paths import DIST
+    from .site import build_site
+
+    if not args.no_build:
+        build_site()
+    handler = functools.partial(http.server.SimpleHTTPRequestHandler, directory=str(DIST))
+    with http.server.ThreadingHTTPServer((args.host, args.port), handler) as httpd:
+        print(f"Does It Arabic? is running at http://{args.host}:{args.port}/  (Ctrl+C to stop)", flush=True)
+        try:
+            httpd.serve_forever()
+        except KeyboardInterrupt:
+            pass
+    return 0
+
+
 def build_parser() -> argparse.ArgumentParser:
     p = argparse.ArgumentParser(prog="doesitarabic", description="Does It Arabic? RTL test matrix")
     sub = p.add_subparsers(dest="command", required=True)
@@ -51,6 +78,13 @@ def build_parser() -> argparse.ArgumentParser:
     m.add_argument("--only", nargs="*", help="adapter ids to run (others keep their previous results)")
     m.add_argument("--keep-reference", action="store_true", help="reuse the existing reference renders")
     m.set_defaults(func=cmd_matrix)
+
+    sub.add_parser("build", help="generate the static site and agent files into dist/").set_defaults(func=cmd_build)
+    sv = sub.add_parser("serve", help="build the site and serve it locally")
+    sv.add_argument("--port", type=int, default=8000)
+    sv.add_argument("--host", default="127.0.0.1")
+    sv.add_argument("--no-build", action="store_true")
+    sv.set_defaults(func=cmd_serve)
     return p
 
 
